@@ -63,3 +63,4 @@ src/
 - **Dark mode** is class-based on `<html>`, set before first paint by an inline script so there's no flash. The toggle is stateless — the icons swap in CSS.
 - **The contact form** validates client-side and then opens the visitor's mail client via `mailto:`, so it works with no backend. To use a service (Resend, Formspree, a Route Handler), replace the `mailto:` line in `src/components/sections/Contact.tsx` with a `fetch` to your endpoint.
 - **Accessibility** — semantic landmarks, visible focus rings, labelled icon buttons, and reduced-motion support across every animation.
+# portfolio
