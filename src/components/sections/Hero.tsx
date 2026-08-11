@@ -60,11 +60,13 @@ export function Hero() {
             variants={variants}
             className="mt-6 max-w-2xl text-lg leading-relaxed text-muted text-pretty sm:text-xl"
           >
-            {profile.tagline} I ship production apps with{" "}
+            {profile.tagline} Four years of{" "}
             <span className="font-medium text-foreground">React Native</span>,{" "}
-            <span className="font-medium text-foreground">React</span>, and{" "}
-            <span className="font-medium text-foreground">TypeScript</span> — from Expo
-            builds to GraphQL and Node.js services behind them.
+            <span className="font-medium text-foreground">React.js</span>, and{" "}
+            <span className="font-medium text-foreground">TypeScript</span> across four
+            companies — super-app architecture, real-time tracking, and payments, with{" "}
+            <span className="font-medium text-foreground">NestJS</span> on the backend so a
+            feature goes from API contract to shipped screen without a handoff.
           </motion.p>
 
           <motion.div variants={variants} className="mt-9 flex flex-wrap items-center gap-3">

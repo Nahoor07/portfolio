@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { socials } from "@/data/site";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,23 +9,18 @@ const links = [
   {
     label: "GitHub",
     handle: socials.github.replace("https://github.com/", "@"),
-    description: "Open-source work, React Native experiments, and side projects.",
+    description:
+      "Source code, React Native experiments, and the projects behind the work above.",
     href: socials.github,
     icon: GithubIcon,
   },
   {
     label: "LinkedIn",
     handle: socials.linkedin.replace("https://www.linkedin.com/in/", "in/"),
-    description: "Full work history, recommendations, and the fastest way to reach me.",
+    description:
+      "Full work history across four companies — and the fastest way to reach me.",
     href: socials.linkedin,
     icon: LinkedinIcon,
-  },
-  {
-    label: "X / Twitter",
-    handle: socials.twitter.replace("https://x.com/", "@"),
-    description: "Notes on mobile performance, TypeScript, and shipping products.",
-    href: socials.twitter,
-    icon: XIcon,
   },
 ];
 
@@ -35,10 +30,10 @@ export function Connect() {
       <SectionHeading
         eyebrow="Elsewhere"
         title="Find me online"
-        description="Code, career history, and the occasional thread about React Native internals."
+        description="Source code and full career history — the quickest routes to seeing more of my work."
       />
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2">
         {links.map((link, index) => (
           <Reveal key={link.label} delay={index * 0.08}>
             <a

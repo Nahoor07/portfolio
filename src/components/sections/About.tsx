@@ -1,5 +1,5 @@
-import { Code2, Rocket, ShieldCheck, Smartphone } from "lucide-react";
-import { profile } from "@/data/site";
+import { Award, Code2, GraduationCap, Radio, Smartphone } from "lucide-react";
+import { certifications, education, profile } from "@/data/site";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Card } from "@/components/ui/Card";
@@ -8,22 +8,22 @@ const principles = [
   {
     icon: Smartphone,
     title: "Mobile-first thinking",
-    body: "Every screen designed for touch, tested on real devices, and tuned for 60fps.",
+    body: "Screens designed for touch, tested on real devices, and tuned to stay smooth on low-end hardware.",
   },
   {
     icon: Code2,
-    title: "Type-safe by default",
-    body: "TypeScript end to end, with shared types between the client and the API.",
+    title: "Reusable by default",
+    body: "One component and hook layer serving several storefront modes — less duplicate code to keep in sync.",
   },
   {
-    icon: Rocket,
-    title: "Ship, then iterate",
-    body: "Small releases, OTA updates, and instrumentation that shows what actually works.",
+    icon: Radio,
+    title: "Real-time where it counts",
+    body: "Live order, rider, and shipment tracking over Socket.IO, Google Maps, and push pipelines.",
   },
   {
-    icon: ShieldCheck,
-    title: "Production-ready",
-    body: "Error boundaries, offline states, crash reporting, and tests where they matter.",
+    icon: Award,
+    title: "Shipped, not shelved",
+    body: "Apps live on the Play Store and App Store, released over the air with EAS Update.",
   },
 ];
 
@@ -32,27 +32,30 @@ export function About() {
     <Section id="about" muted>
       <SectionHeading
         eyebrow="About me"
-        title="Engineer focused on mobile and web product quality"
+        title="Full-stack developer with a mobile centre of gravity"
         description={profile.summary}
       />
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start">
         <Reveal from="left" className="space-y-5 text-base leading-relaxed text-muted">
           <p>
-            I started out on the web with React and moved into React Native when I realised
-            how much of a product&apos;s value lives on a phone. Today I work across both —
-            a shared TypeScript codebase, a design system that serves web and mobile, and a
-            data layer built on GraphQL or REST depending on what the team needs.
+            My strongest work is on the client — React Native and React.js, with TypeScript
+            throughout. That&apos;s where I&apos;ve spent four years: super-app architecture
+            that lets independent mini-apps share one shell, discovery feeds that stay
+            smooth on large catalogs, and the payment, auth, and location flows that sit
+            underneath them.
           </p>
           <p>
-            My day-to-day is Expo and EAS for mobile delivery, Redux Toolkit or React Query
-            for state, Apollo Client for GraphQL, and Node.js when the backend needs a hand.
-            I&apos;m comfortable owning a feature from API contract through to store release.
+            I also work in the backend with NestJS and TypeORM — feature modules, REST
+            endpoints, and Socket.IO gateways against an existing architecture. I&apos;d
+            describe that as solid supporting knowledge rather than my specialism, and its
+            real value is that mobile work never stalls waiting on an API handoff.
           </p>
           <p>
-            Outside of feature work I spend time on the parts teams often defer: performance
-            profiling, accessibility, CI pipelines, and code review culture. Those are what
-            keep a codebase pleasant to work in a year later.
+            Day to day that means Expo and EAS for delivery, Redux Toolkit or TanStack Query
+            for state, and a typed service layer with centralized error handling over REST
+            and GraphQL. I&apos;m comfortable owning a feature from API contract through to
+            store release.
           </p>
         </Reveal>
 
@@ -67,6 +70,44 @@ export function About() {
             </Reveal>
           ))}
         </div>
+      </div>
+
+      <div className="mt-10 grid gap-4 lg:grid-cols-2">
+        <Reveal delay={0.05}>
+          <Card className="h-full bg-background">
+            <div className="flex items-center gap-2 text-accent">
+              <GraduationCap className="size-5" />
+              <h3 className="text-sm font-semibold tracking-wide uppercase">Education</h3>
+            </div>
+            <p className="mt-4 text-base font-medium">{education.degree}</p>
+            <p className="mt-1 text-sm text-muted">
+              {education.institution} — {education.location}
+            </p>
+            <p className="mt-1 font-mono text-xs text-muted">{education.period}</p>
+          </Card>
+        </Reveal>
+
+        <Reveal delay={0.12}>
+          <Card className="h-full bg-background">
+            <div className="flex items-center gap-2 text-accent">
+              <Award className="size-5" />
+              <h3 className="text-sm font-semibold tracking-wide uppercase">
+                Certifications
+              </h3>
+            </div>
+            <ul className="mt-4 space-y-2">
+              {certifications.map((certification) => (
+                <li
+                  key={certification}
+                  className="flex gap-2.5 text-sm leading-relaxed text-muted"
+                >
+                  <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-accent" />
+                  {certification}
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </Reveal>
       </div>
     </Section>
   );

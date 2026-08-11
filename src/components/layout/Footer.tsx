@@ -1,11 +1,10 @@
 import { ArrowUp, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, XIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { navLinks, profile, socials } from "@/data/site";
 
 const socialLinks = [
   { href: socials.github, label: "GitHub", icon: GithubIcon },
   { href: socials.linkedin, label: "LinkedIn", icon: LinkedinIcon },
-  { href: socials.twitter, label: "X", icon: XIcon },
   { href: `mailto:${profile.email}`, label: "Email", icon: Mail },
 ];
 
@@ -20,8 +19,8 @@ export function Footer() {
               <span className="text-accent">.</span>
             </p>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              {profile.role} building cross-platform apps with React Native, Expo, React,
-              and TypeScript.
+              Full-stack developer in {profile.location}, building production mobile and
+              web apps with React Native, Expo, React.js, TypeScript, and NestJS.
             </p>
             <div className="mt-5 flex gap-2">
               {socialLinks.map((link) => (

@@ -67,7 +67,7 @@ export function Contact() {
       <SectionHeading
         eyebrow="Contact"
         title="Let's build something together"
-        description="I'm currently open to full-time and contract roles. Send a note about your team or project and I'll reply within a day or two."
+        description="I'm open to new opportunities — full-time or contract, remote or in Islamabad. Send a note about your team or project and I'll get back to you within a day or two."
       />
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
@@ -139,7 +139,7 @@ export function Contact() {
                 value={fields.subject}
                 error={errors.subject}
                 onChange={(value) => update("subject", value)}
-                placeholder="React Native role at ..."
+                placeholder="React Native role at …"
               />
             </div>
 

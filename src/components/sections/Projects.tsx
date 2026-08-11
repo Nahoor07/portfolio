@@ -11,7 +11,7 @@ export function Projects() {
       <SectionHeading
         eyebrow="Featured projects"
         title="Selected work"
-        description="A mix of shipped client apps and personal builds. Each one shows a different part of the stack — mobile delivery, GraphQL data layers, and performance work."
+        description="Production apps live on the Play Store and App Store. Each one covers a different part of the stack — super-app architecture, real-time tracking, payments, and performance."
       />
 
       <div className="mt-12 grid gap-5 lg:grid-cols-2">

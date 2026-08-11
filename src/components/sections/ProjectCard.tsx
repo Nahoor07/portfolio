@@ -35,7 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-accent"
             >
-              Live demo
+              {project.liveLabel ?? "Live demo"}
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           ) : null}

@@ -29,7 +29,7 @@ export function Skills() {
       <SectionHeading
         eyebrow="Skills"
         title="The stack I build with every day"
-        description="Depth in the React ecosystem across mobile and web, with the backend and tooling knowledge to ship features end to end."
+        description="Depth in the React ecosystem across mobile and web, with enough backend to carry a feature over the line rather than hand it off."
       />
 
       <Reveal delay={0.1} className="mt-8 flex flex-wrap gap-2">

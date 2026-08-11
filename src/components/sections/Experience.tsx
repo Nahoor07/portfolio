@@ -12,7 +12,7 @@ export function Experience() {
         <SectionHeading
           eyebrow="Experience"
           title="Where I've shipped"
-          description="Roles building and leading mobile and web product work, with the outcomes that mattered."
+          description="Four years across four companies, from Android release engineering to super-app architecture."
         />
         <Reveal delay={0.1}>
           <ButtonLink href={profile.resumeUrl} variant="secondary" download>

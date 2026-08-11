@@ -1,6 +1,6 @@
-# Developer Portfolio
+# Nahoor Tahir — Developer Portfolio
 
-A modern, minimal portfolio for a React Native & React developer — built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Motion** for animation.
+A modern, minimal portfolio for a React Native & full-stack developer — built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Motion** for animation.
 
 ## Getting started
 
@@ -18,7 +18,7 @@ Almost all content lives in **[`src/data/site.ts`](src/data/site.ts)** — one f
 | Export        | Drives                                          |
 | ------------- | ----------------------------------------------- |
 | `profile`     | Name, role, tagline, email, phone, availability  |
-| `socials`     | GitHub / LinkedIn / X links (hero, Connect, footer) |
+| `socials`     | GitHub / LinkedIn links (hero, Connect, footer)  |
 | `navLinks`    | Navbar + footer navigation                       |
 | `coreStack`   | Hero marquee + skills highlight row              |
 | `skillGroups` | Skills section (name + proficiency bar)          |
@@ -26,15 +26,17 @@ Almost all content lives in **[`src/data/site.ts`](src/data/site.ts)** — one f
 | `projects`    | Featured projects grid (`featured: true` = wide card) |
 | `services`    | Services grid                                    |
 | `stats`       | Hero stat row                                    |
+| `education`   | Education card in About                          |
+| `certifications` | Certifications card in About                  |
 
-Two things to replace before publishing:
+Content is populated from the CV. Still outstanding:
 
-1. **Resume** — drop your PDF at `public/resume.pdf` (the Experience section links to `profile.resumeUrl`).
-2. **Placeholder copy** — company names, project URLs, and stat figures are samples.
+- **Store links** — Lumi, Borku, and Odda have no `liveUrl` yet. Add the Google Play / App Store URLs in `projects` and the cards link out automatically (`liveLabel` sets the link text).
+- **Resume** — `public/resume.pdf` is in place; replace the file whenever the CV changes.
 
 ## Sections
 
-Hero · About · Skills · Experience · Featured Projects · Services · Connect (GitHub/LinkedIn) · Contact · Footer
+Hero · About (incl. education & certifications) · Skills · Experience · Featured Projects · Services · Connect (GitHub/LinkedIn) · Contact · Footer
 
 ## Structure
 
@@ -63,4 +65,3 @@ src/
 - **Dark mode** is class-based on `<html>`, set before first paint by an inline script so there's no flash. The toggle is stateless — the icons swap in CSS.
 - **The contact form** validates client-side and then opens the visitor's mail client via `mailto:`, so it works with no backend. To use a service (Resend, Formspree, a Route Handler), replace the `mailto:` line in `src/components/sections/Contact.tsx` with a `fetch` to your endpoint.
 - **Accessibility** — semantic landmarks, visible focus rings, labelled icon buttons, and reduced-motion support across every animation.
-# portfolio
