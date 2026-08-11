@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Developer Portfolio
 
-## Getting Started
+A modern, minimal portfolio for a React Native & React developer — built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Motion** for animation.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Making it yours
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Almost all content lives in **[`src/data/site.ts`](src/data/site.ts)** — one file, fully typed. Edit it and every section updates:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Export        | Drives                                          |
+| ------------- | ----------------------------------------------- |
+| `profile`     | Name, role, tagline, email, phone, availability  |
+| `socials`     | GitHub / LinkedIn / X links (hero, Connect, footer) |
+| `navLinks`    | Navbar + footer navigation                       |
+| `coreStack`   | Hero marquee + skills highlight row              |
+| `skillGroups` | Skills section (name + proficiency bar)          |
+| `experience`  | Experience timeline                              |
+| `projects`    | Featured projects grid (`featured: true` = wide card) |
+| `services`    | Services grid                                    |
+| `stats`       | Hero stat row                                    |
 
-## Learn More
+Two things to replace before publishing:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Resume** — drop your PDF at `public/resume.pdf` (the Experience section links to `profile.resumeUrl`).
+2. **Placeholder copy** — company names, project URLs, and stat figures are samples.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Sections
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Hero · About · Skills · Experience · Featured Projects · Services · Connect (GitHub/LinkedIn) · Contact · Footer
 
-## Deploy on Vercel
+## Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├─ app/
+│  ├─ layout.tsx        # fonts, SEO metadata, no-flash theme script
+│  ├─ page.tsx          # composes every section
+│  └─ globals.css       # design tokens (light/dark), keyframes
+├─ components/
+│  ├─ ui/               # Section, SectionHeading, Card, Badge, Button, Reveal, BrandIcons
+│  ├─ layout/           # Navbar, Footer, ThemeToggle
+│  └─ sections/         # one component per page section
+├─ data/site.ts         # all content
+└─ lib/                 # cn() helper, shared easing curve
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Reusable primitives
+
+- **`Section` / `SectionHeading`** — consistent vertical rhythm, max width, and eyebrow/title/description heading.
+- **`Reveal`** — scroll-triggered entrance animation with a direction and delay; falls back to a static render under `prefers-reduced-motion`.
+- **`Card`**, **`Badge`**, **`Button` / `ButtonLink`** — variant-based building blocks used throughout.
+
+## Notes
+
+- **Dark mode** is class-based on `<html>`, set before first paint by an inline script so there's no flash. The toggle is stateless — the icons swap in CSS.
+- **The contact form** validates client-side and then opens the visitor's mail client via `mailto:`, so it works with no backend. To use a service (Resend, Formspree, a Route Handler), replace the `mailto:` line in `src/components/sections/Contact.tsx` with a `fetch` to your endpoint.
+- **Accessibility** — semantic landmarks, visible focus rings, labelled icon buttons, and reduced-motion support across every animation.
