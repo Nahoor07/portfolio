@@ -64,7 +64,8 @@ export function Hero() {
             <span className="font-medium text-foreground">React Native</span>,{" "}
             <span className="font-medium text-foreground">React.js</span>, and{" "}
             <span className="font-medium text-foreground">TypeScript</span> across four
-            companies — super-app architecture, real-time tracking, and payments, with{" "}
+            companies — super-app architecture, real-time tracking, payments, and{" "}
+            <span className="font-medium text-foreground">AI integration</span> — with{" "}
             <span className="font-medium text-foreground">NestJS</span> on the backend so a
             feature goes from API contract to shipped screen without a handoff.
           </motion.p>

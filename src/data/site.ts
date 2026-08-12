@@ -6,10 +6,10 @@
 export const profile = {
   name: "Nahoor Tahir",
   firstName: "Nahoor",
-  role: "React Native & Full-Stack Developer",
-  tagline: "I ship production mobile and web apps end to end.",
+  role: "React Native, Full-Stack & AI App Developer",
+  tagline: "I ship production mobile and web apps end to end — including AI-powered features.",
   summary:
-    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. I work in React Native and React.js on the frontend and NestJS with TypeORM on the backend, which lets me own a feature end to end — API contract through shipped screen. My recent work centres on super-app architecture, real-time order and location tracking, payment integration, and performance tuning for large, data-heavy apps.",
+    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. I work in React Native and React.js on the frontend and NestJS with TypeORM on the backend, which lets me own a feature end to end — API contract through shipped screen. My recent work centres on super-app architecture, real-time order and location tracking, payment integration, AI-powered product features, and performance tuning for large, data-heavy apps. On Lumi I built an AI chat assistant that books a ride for the user straight from conversation.",
   location: "Islamabad, Pakistan",
   email: "nahoor98@gmail.com",
   phone: "+92 318 0970708",
@@ -44,6 +44,7 @@ export const coreStack = [
   "GraphQL",
   "Apollo",
   "REST APIs",
+  "AI Integration",
 ] as const;
 
 export type SkillGroup = {
@@ -96,6 +97,18 @@ export const skillGroups: SkillGroup[] = [
       { name: "WebSockets (Socket.IO)", level: 78 },
       { name: "NestJS", level: 72, highlight: true },
       { name: "TypeORM & PostgreSQL", level: 68 },
+    ],
+  },
+  {
+    title: "AI Integration",
+    description:
+      "Shipping AI features that actually do something — chat assistants wired to real app actions, not just answers.",
+    skills: [
+      { name: "In-app AI chat assistants", level: 85, highlight: true },
+      { name: "LLM APIs & prompt design", level: 82, highlight: true },
+      { name: "Tool / function calling", level: 80 },
+      { name: "Streaming responses in React Native", level: 78 },
+      { name: "Conversational booking & task flows", level: 85 },
     ],
   },
 ];
@@ -175,12 +188,24 @@ export const experience: Experience[] = [
   },
 ];
 
+export type ProjectImage = {
+  /** Path under /public. */
+  src: string;
+  alt: string;
+  /** Short caption shown under the screenshot in the lightbox. */
+  caption: string;
+  /** Landscape web capture — rendered wider than the default phone-shaped tile. */
+  wide?: boolean;
+};
+
 export type Project = {
   title: string;
   category: string;
   description: string;
   highlights: string[];
   stack: string[];
+  /** App screenshots — first one doubles as the card thumbnail. */
+  images?: ProjectImage[];
   liveUrl?: string;
   /** Overrides the default "Live demo" label — e.g. "Google Play". */
   liveLabel?: string;
@@ -212,45 +237,157 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Lumi — Ride-Hailing Platform",
-    category: "React Native · Real-time",
+    title: "Lumi — AI-Powered Ride-Hailing Platform",
+    category: "React Native · AI · Real-time",
     description:
-      "Two production apps on Android and iOS, comparable to Uber and inDrive — a driver app and a customer app sharing one real-time coordination layer.",
+      "Two production apps on Android and iOS, comparable to Uber and inDrive — a driver app and a customer app sharing one real-time coordination layer, with an AI chat assistant that books rides conversationally.",
     highlights: [
+      "AI ride booking: an in-app chat assistant that turns a plain-language request into a confirmed ride — parsing pickup and drop-off, resolving places, quoting the fare, and dispatching the booking without the user touching the standard flow",
+      "Wired the AI to the app's real booking actions through tool/function calling, so the assistant drives the same validated ride pipeline as the manual UI",
       "Lumi Driver: registration, ride handling, and live status updates",
       "Lumi Customer: ride booking, fare estimates, and live tracking",
       "Real-time location tracking and navigation with Google Maps APIs and WebSockets",
       "Firebase Auth, Twilio SMS/OTP, and Expo Push Notifications",
     ],
-    stack: ["React Native CLI", "Redux", "Firebase", "Google Maps", "WebSockets", "Twilio"],
+    stack: ["React Native CLI", "AI Chat Assistant", "Redux", "Firebase", "Google Maps", "WebSockets", "Twilio"],
+    images: [
+      {
+        src: "/projects/lumi/ai-chat-booking.webp",
+        alt: "Lumi AI assistant booking a ride through chat",
+        caption: "AI assistant booking a ride from a plain-language request",
+      },
+      {
+        src: "/projects/lumi/super-app-home.webp",
+        alt: "Lumi super app home screen with Drive, Food, Ticket, Hotel and Hospitality services",
+        caption: "Super-app home — multiple services behind one shell",
+      },
+      {
+        src: "/projects/lumi/ride-booking.webp",
+        alt: "Lumi ride booking screen with live map and pickup point",
+        caption: "Ride booking with live map and pickup selection",
+      },
+      {
+        src: "/projects/lumi/fare-selection.webp",
+        alt: "Lumi fare selection screen with ride tiers and name-your-price control",
+        caption: "Fare estimates and name-your-price ride tiers",
+      },
+      {
+        src: "/projects/lumi/driver-ride-offer.webp",
+        alt: "Lumi Drivers incoming ride request with route and fare offer",
+        caption: "Driver app — incoming request with route and counter-offer",
+      },
+      {
+        src: "/projects/lumi/driver-live-tracking.webp",
+        alt: "Lumi Drivers live navigation and ride tracking screen",
+        caption: "Driver app — live navigation and ride tracking",
+      },
+    ],
+    liveUrl: "https://play.google.com/store/apps/details?id=com.lastorder.app",
+    liveLabel: "Google Play",
     featured: true,
   },
   {
-    title: "Borku — Multivendor Delivery Platform",
-    category: "React Native",
+    title: "Borku — Multivendor Delivery Ecosystem",
+    category: "React Native · GraphQL",
     description:
-      "A cross-platform multivendor delivery app for Android and iOS covering vendor browsing, ordering, and real-time delivery tracking.",
+      "Three production apps on the App Store and Google Play — a customer app, a rider app, and the Partner Hub store app — all driven by one GraphQL API with real-time subscriptions.",
     highlights: [
-      "Modular, reusable component architecture for multi-vendor catalog browsing",
-      "Cart management and full order lifecycle tracking",
-      "Secure authentication, push notifications, and real-time order status updates",
+      "End-to-end order flow across three apps: the store accepts an order, riders are notified, a rider is assigned, and delivery timing updates flow back to the customer",
+      "GraphQL subscriptions keep order state live on every device, so no app polls for status changes",
+      "Customer app: multi-vendor catalog browsing, categories, offers and credit, cart, and doorstep delivery tracking",
+      "Partner Hub: taking-order toggle, daily and weekly earnings, ratings, and menu/stock management",
+      "Rider app: assignment flow, live order progress, earnings dashboard, and withdrawals",
+      "Modular, reusable component architecture shared across all three apps",
     ],
-    stack: ["React Native CLI", "Redux", "Firebase", "REST APIs", "Google Maps"],
+    stack: ["React Native CLI", "GraphQL", "Apollo", "Subscriptions", "Redux", "Google Maps"],
+    images: [
+      {
+        src: "/projects/borku/order-progress.webp",
+        alt: "Borku order in progress showing rider assigned, rider at restaurant, and delivered steps",
+        caption: "Live order lifecycle — rider assigned through delivered",
+      },
+      {
+        src: "/projects/borku/partner-hub-dashboard.webp",
+        alt: "Borku Partner Hub dashboard with taking-order toggle, earnings, and rating",
+        caption: "Partner Hub — taking-order toggle, earnings, and ratings",
+      },
+      {
+        src: "/projects/borku/order-online.webp",
+        alt: "Borku customer app store selection screen",
+        caption: "Customer app — pick a store and order for doorstep delivery",
+      },
+      {
+        src: "/projects/borku/customer-offers.webp",
+        alt: "Borku customer app offers, categories, and recommended items",
+        caption: "Offers, categories, and recommendations",
+      },
+      {
+        src: "/projects/borku/rider-earnings.webp",
+        alt: "Borku rider earnings screen with balance and withdraw action",
+        caption: "Rider app — earnings and withdrawals",
+      },
+    ],
+    liveUrl: "https://apps.apple.com/us/app/borku/id6642702509",
+    liveLabel: "App Store",
+    featured: true,
   },
   {
-    title: "Intercargo — Web Portal & Odda Mobile App",
-    category: "Angular · React Native",
+    title: "Intercargo & Odda — Freight Portal + Same-Day Courier App",
+    category: "Angular · React Native · SignalR",
     description:
-      "An end-to-end logistics platform pairing a responsive Angular portal with the Odda mobile app, giving customers real-time shipment visibility from any device.",
+      "A logistics platform pairing the Intercargo freight portal with Odda, an on-demand same-day courier app for the UK — book a parcel, collect live quotes from nearby drivers, and follow it door to door.",
     highlights: [
-      "Real-time shipment tracking for flight and sailing schedules with live load data and dynamic quotes",
-      "Google Maps route visualization across web and mobile",
-      "Shared authentication and API service layers keeping data in sync across platforms",
-      "Push notifications for shipment status, delivery milestones, and quote updates",
+      "Real-time delivery tracking driven by SignalR, pushing driver location, ETAs, and status changes to the app as they happen",
+      "Live quotes: a booking fans out to nearby drivers and returns competing vehicle offers with prices, ETAs, and ratings within seconds",
+      "Booking flow covering pickup and destination, detour stops, cargo details, and ASAP / at / by / between scheduling windows",
+      "Booking management across active, completed, and cancelled deliveries, with share-location and follow for consignors and consignees",
+      "Intercargo portal: shipment tracking, flight and sailing schedules, and dynamic freight quotes across air, sea, and road",
+      "Push notifications and in-app activity for quotes, confirmations, driver assignment, and delivery milestones",
     ],
-    stack: ["Angular", "React Native CLI", "Redux", "JWT Auth", "REST APIs"],
-    liveUrl: "https://intercargo.com",
+    stack: ["Angular", "React Native CLI", "SignalR", "Redux", "JWT Auth", "REST APIs"],
+    images: [
+      {
+        src: "/projects/odda/live-tracking.webp",
+        alt: "Odda live vehicle tracking screen with route across the UK",
+        caption: "Odda — live vehicle tracking over SignalR",
+      },
+      {
+        src: "/projects/odda/live-quotes.webp",
+        alt: "Odda live quotes screen showing competing driver offers",
+        caption: "Live quotes from nearby drivers, with ETA and price",
+      },
+      {
+        src: "/projects/odda/deliveries-list.webp",
+        alt: "Odda bookings list with in-progress deliveries and job details",
+        caption: "Bookings — active, completed, and cancelled deliveries",
+      },
+      {
+        src: "/projects/odda/activity-updates.webp",
+        alt: "Odda notifications screen with booking and payment updates",
+        caption: "Live activity — quotes, confirmations, and milestones",
+      },
+      {
+        src: "/projects/intercargo/web-hero-tracking.webp",
+        alt: "Intercargo website homepage with shipment tracking and schedules widget",
+        caption: "Intercargo portal — shipment tracking and schedules",
+        wide: true,
+      },
+      {
+        src: "/projects/intercargo/web-solutions.webp",
+        alt: "Intercargo website section describing real-time order tracking solutions",
+        caption: "Real-time order tracking across air, sea, and road",
+        wide: true,
+      },
+      {
+        src: "/projects/intercargo/web-freight-platform.webp",
+        alt: "Intercargo digital freight platform section with shipment dashboard mockup",
+        caption: "The digital freight platform dashboard",
+        wide: true,
+      },
+    ],
+    liveUrl: "https://www.intercargo.com/",
     liveLabel: "intercargo.com",
+    featured: true,
   },
 ];
 
@@ -289,6 +426,13 @@ export const services: Service[] = [
       "Live order, rider, and shipment tracking built on Socket.IO, Google Maps, and push notification pipelines.",
     icon: "workflow",
     points: ["Socket.IO", "Google Maps & Places", "Expo & FCM push"],
+  },
+  {
+    title: "AI-Powered App Features",
+    description:
+      "Adding AI where it removes steps — like Lumi's chat assistant, where a user books a ride by describing the trip instead of filling a form.",
+    icon: "workflow",
+    points: ["Conversational booking flows", "LLM tool calling", "Chat UI & streaming"],
   },
   {
     title: "Performance Optimisation",
