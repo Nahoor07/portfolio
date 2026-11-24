@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nahoor Tahir — Mobile &amp; Web App Portfolio</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root {
+    --ink: #0b1530; --body: #3a4560; --muted: #6b7690; --line: #e2e7f0;
+    --blue: #2563eb; --blue-soft: #eaf1ff;
+    --violet: #7c3aed; --violet-soft: #f1eaff;
+    --green: #059669; --green-soft: #e6f7f1;
+    --bg: #ffffff; --panel: #f6f8fc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--body); font-size: 10.3pt; line-height: 1.5; background: var(--bg);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 297mm; height: 210mm; padding: 14mm 16mm 14mm;
+    position: relative; overflow: hidden; page-break-after: always;
+    display: flex; flex-direction: column;
+  }
+  .page:last-child { page-break-after: auto; }
+  .footer {
+    position: absolute; left: 16mm; right: 16mm; bottom: 6.5mm;
+    display: flex; justify-content: space-between;
+    font-size: 7.3pt; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 2.3mm;
+  }
+  h1, h2, h3 { color: var(--ink); line-height: 1.12; }
+  h2 { font-size: 23pt; letter-spacing: -.015em; }
+  h3 { font-size: 11pt; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 2mm;
+    font-size: 7.8pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 3mm;
+  }
+  .eyebrow.web { color: var(--violet); }
+  .tag { font-size: 6.8pt; letter-spacing: .1em; font-weight: 800; padding: .5mm 2mm; border-radius: 99px; }
+  .tag.m { background: var(--blue-soft); color: var(--blue); }
+  .tag.w { background: var(--violet-soft); color: var(--violet); }
+  .tag.b { background: var(--green-soft); color: var(--green); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 1.5mm; }
+  .chip { font-size: 7.6pt; font-weight: 600; color: var(--blue); background: var(--blue-soft); border-radius: 99px; padding: .7mm 2.8mm; }
+  .chip.w { color: var(--violet); background: var(--violet-soft); }
+  .chip.b { color: var(--green); background: var(--green-soft); }
+
+  ul.ticks { list-style: none; }
+  ul.ticks li { position: relative; padding-left: 5mm; margin-bottom: 1.6mm; }
+  ul.ticks li::before { content: ""; position: absolute; left: 0; top: 1.8mm; width: 2mm; height: 2mm; border-radius: 50%; background: var(--blue); }
+  ul.ticks.w li::before { background: var(--violet); }
+
+  /* Browser frame for web screenshots */
+  .browser { border: 1px solid var(--line); border-radius: 3mm; overflow: hidden; background: #fff; box-shadow: 0 3mm 9mm rgba(11,21,48,.10); }
+  .browser .bar { height: 6.5mm; background: #f1f3f8; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 1.3mm; padding: 0 3mm; }
+  .browser .bar i { width: 2mm; height: 2mm; border-radius: 50%; background: #d4d9e4; display: block; }
+  .browser .bar span { margin-left: 3mm; flex: 1; font-size: 6.8pt; color: var(--muted); background: #fff; border-radius: 99px; padding: .4mm 3mm; border: 1px solid var(--line); }
+  .browser img { display: block; width: 100%; }
+  figcaption { font-size: 7.8pt; color: var(--muted); margin-top: 1.8mm; line-height: 1.35; }
+
+  /* Cover */
+  .cover { padding: 0; flex-direction: row; background: #0b1530; color: #c8d3f0; }
+  .cover .left { width: 150mm; padding: 18mm 0 18mm 18mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover .eyebrow { color: #8fb0ff; }
+  .cover h1 { color: #fff; font-size: 42pt; letter-spacing: -.025em; margin-bottom: 2.5mm; }
+  .cover .role { font-size: 15pt; color: #fff; margin-bottom: 5mm; font-weight: 500; }
+  .cover .role b { background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cover .lede { font-size: 11.2pt; margin-bottom: 8mm; max-width: 128mm; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin-bottom: 8mm; max-width: 128mm; }
+  .stat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 2.5mm; padding: 3mm; }
+  .stat b { display: block; font-size: 19pt; color: #fff; line-height: 1.05; }
+  .stat span { font-size: 7.4pt; color: #9aa8cc; line-height: 1.25; display: block; margin-top: 1mm; }
+  .cover .chips .chip { background: rgba(96,165,250,.14); color: #bcd3ff; }
+  .cover .chips .chip.w { background: rgba(167,139,250,.16); color: #d8c9ff; }
+  .cover .right { flex: 1; position: relative; background: radial-gradient(120% 90% at 70% 30%, #2848b8 0%, #172a6b 45%, #0b1530 80%); }
+  .cover .right .browser { position: absolute; width: 118mm; right: 14mm; top: 26mm; box-shadow: 0 8mm 20mm rgba(0,0,0,.45); border-color: rgba(255,255,255,.15); }
+  .cover .right .phone { position: absolute; width: 40mm; border-radius: 4.5mm; box-shadow: 0 8mm 18mm rgba(0,0,0,.5); }
+  .cover .right .p1 { left: 10mm; top: 92mm; }
+  .cover .right .p2 { left: 56mm; top: 110mm; }
+  .cover .footer { color: #6f7ea6; border-color: rgba(255,255,255,.1); }
+
+  /* Capabilities */
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; margin-top: 6mm; }
+  .lane { border-radius: 3.5mm; padding: 5.5mm; background: var(--panel); border-top: 1.2mm solid var(--blue); }
+  .lane.w { border-top-color: var(--violet); }
+  .lane.b { border-top-color: var(--green); }
+  .lane h3 { font-size: 12.5pt; margin-bottom: 1mm; }
+  .lane .sub { font-size: 8.4pt; color: var(--muted); margin-bottom: 3mm; }
+  .lane ul.ticks { font-size: 8.9pt; margin-bottom: 3mm; }
+  .lane.b ul.ticks li::before { background: var(--green); }
+  .index { margin-top: 6mm; display: grid; grid-template-columns: repeat(6, 1fr); gap: 3mm; }
+  .index div { border: 1px solid var(--line); border-radius: 2.5mm; padding: 3mm; }
+  .index b { display: block; color: var(--ink); font-size: 9.6pt; margin-bottom: 1mm; }
+  .index span { font-size: 7.6pt; color: var(--muted); line-height: 1.3; display: block; margin-top: 1mm; }
+
+  /* Mobile project page */
+  .proj { flex-direction: row; gap: 10mm; align-items: center; }
+  .proj .text { width: 98mm; flex-shrink: 0; display: flex; flex-direction: column; }
+  .proj h2 { margin-bottom: 2mm; }
+  .proj .desc { margin: 2mm 0 4mm; font-size: 9.9pt; }
+  .proj .status { font-size: 8.3pt; color: var(--green); font-weight: 700; margin-top: 3mm; }
+  .proj ul.ticks { font-size: 9.1pt; margin-top: 4mm; }
+  .shots { flex: 1; display: flex; gap: 5mm; align-items: center; justify-content: center; padding-bottom: 4mm; }
+  .shot { flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 52mm; }
+  .shot img { width: 100%; border-radius: 3.5mm; border: 1px solid var(--line); display: block; box-shadow: 0 3mm 8mm rgba(11,21,48,.12); }
+  .shot figcaption { text-align: center; }
+
+  .gallery-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6mm; }
+  .gallery-head h2 { font-size: 16pt; }
+  .gallery-head span { font-size: 8.8pt; color: var(--muted); }
+  .gallery { flex: 1; display: flex; gap: 7mm; justify-content: center; align-items: center; padding-bottom: 8mm; }
+  .gallery .shot { flex: 0 0 auto; max-width: none; }
+  .gallery .shot img { height: 134mm; width: auto; }
+
+  .web2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 6mm; flex: 1; padding-bottom: 8mm; align-items: center; }
+  .web2 .stack { display: flex; flex-direction: column; gap: 5mm; }
+
+  /* Section divider */
+  .divider { background: linear-gradient(135deg, #1b0f45 0%, #3b1d8f 55%, #6d28d9 100%); color: #ddd2ff; justify-content: center; padding-left: 22mm; }
+  .divider .eyebrow { color: #c4b5fd; }
+  .divider h2 { color: #fff; font-size: 34pt; max-width: 200mm; margin-bottom: 5mm; }
+  .divider p { font-size: 12pt; max-width: 175mm; margin-bottom: 9mm; }
+  .divider .footer { color: #a594d9; border-color: rgba(255,255,255,.15); }
+  table.plat { border-collapse: collapse; width: 240mm; font-size: 9pt; background: rgba(255,255,255,.06); border-radius: 3mm; overflow: hidden; }
+  table.plat th { text-align: left; font-size: 7.3pt; letter-spacing: .12em; text-transform: uppercase; color: #c4b5fd; padding: 2.8mm 4mm; border-bottom: 1px solid rgba(255,255,255,.14); }
+  table.plat td { padding: 2.8mm 4mm; border-bottom: 1px solid rgba(255,255,255,.08); color: #e9e3ff; vertical-align: top; }
+  table.plat tr:last-child td { border-bottom: 0; }
+  table.plat td b { color: #fff; }
+  table.plat td small { color: #b3a6e0; font-size: 7.8pt; }
+
+  /* Web project page */
+  .wproj { display: grid; grid-template-columns: 100mm 1fr; gap: 9mm; flex: 1; padding-bottom: 6mm; }
+  .wproj .text { display: flex; flex-direction: column; }
+  .wproj h2 { margin-bottom: 2mm; }
+  .wproj .desc { font-size: 9.7pt; margin: 1.5mm 0 3.5mm; }
+  .wproj ul.ticks { font-size: 8.9pt; margin-top: 3.5mm; }
+  .wproj .media { display: flex; flex-direction: column; gap: 4.5mm; justify-content: center; }
+
+  /* Admin module map (illustration of modules built, not a screenshot) */
+  .admin { display: grid; grid-template-columns: 34mm 1fr; min-height: 0; }
+  .admin .side { background: #0f172a; color: #94a3b8; padding: 4mm 3mm; font-size: 7.4pt; }
+  .admin .side .logo { color: #fff; font-weight: 800; font-size: 9pt; margin-bottom: 4mm; }
+  .admin .side div.i { padding: 1.3mm 2mm; border-radius: 1.5mm; margin-bottom: .8mm; }
+  .admin .side div.i.on { background: rgba(124,58,237,.35); color: #fff; }
+  .admin .main { padding: 4mm; background: #f8fafc; }
+  .admin .main .t { font-size: 7.3pt; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 2.5mm; }
+  .mods { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+  .mod { background: #fff; border: 1px solid var(--line); border-radius: 2mm; padding: 2.6mm 3mm; }
+  .mod b { display: block; color: var(--ink); font-size: 8.4pt; margin-bottom: .6mm; }
+  .mod span { font-size: 7.4pt; color: var(--muted); line-height: 1.32; display: block; }
+  .note { font-size: 7.4pt; color: var(--muted); font-style: italic; }
+
+  /* Closing */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 5mm; }
+  .tech-row { margin-bottom: 3.6mm; }
+  .tech-row h3 { margin-bottom: 1.6mm; font-size: 9.6pt; }
+  .cta { margin-top: auto; margin-bottom: 6mm; background: linear-gradient(120deg, #0b1530, #23307a 60%, #4c1d95); color: #dbe4ff; border-radius: 4mm; padding: 6.5mm 9mm; display: flex; justify-content: space-between; align-items: center; gap: 10mm; }
+  .cta h3 { color: #fff; font-size: 15pt; margin-bottom: 1.5mm; }
+  .cta p { font-size: 9.8pt; max-width: 170mm; }
+  .cta .pill { white-space: nowrap; background: #fff; color: var(--ink); font-weight: 700; font-size: 9.5pt; border-radius: 99px; padding: 2.5mm 6mm; }
+</style>
+</head>
+<body>
+
+<!-- 01 Cover -->
+<section class="page cover">
+  <div class="left">
+    <div class="eyebrow">Mobile &amp; Web Development Portfolio</div>
+    <h1>Nahoor Tahir</h1>
+    <div class="role"><b>React Native + Next.js</b> Developer</div>
+    <p class="lede">I ship complete products, not just screens: the Android &amp; iOS apps customers use, the Next.js website they order from, and the admin dashboard the business runs on. Ride-hailing, multi-vendor delivery, logistics, and AI features, live in production.</p>
+    <div class="stats">
+      <div class="stat"><b>4+</b><span>Years shipping products</span></div>
+      <div class="stat"><b>8+</b><span>Apps live on the stores</span></div>
+      <div class="stat"><b>6</b><span>Next.js web platforms</span></div>
+      <div class="stat"><b>3</b><span>Admin dashboards</span></div>
+    </div>
+    <div class="chips">
+      <span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">TypeScript</span><span class="chip">GraphQL</span>
+      <span class="chip w">Next.js 14–16</span><span class="chip w">React 19</span><span class="chip w">Tailwind</span><span class="chip w">TanStack Query</span>
+    </div>
+  </div>
+  <div class="right">
+    <div class="browser">
+      <div class="bar"><i></i><i></i><i></i><span>Sipp · Next.js customer website</span></div>
+      <img src="../public/projects/sipp/web-home.jpg" alt="">
+    </div>
+    <img class="phone p1" src="../public/projects/lumi/ai-chat-booking.webp" alt="">
+    <img class="phone p2" src="../public/projects/borku/order-progress.webp" alt="">
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>01</span></div>
+</section>
+
+<!-- 02 What I build -->
+<section class="page">
+  <div class="eyebrow">What I bring to your project</div>
+  <h2>One developer across your whole product</h2>
+  <p style="max-width:215mm;margin-top:3mm">Most platforms I work on have three faces: a mobile app, a customer website, and an admin panel, all on the same API. I build and fix all three, so features ship end to end without waiting on a hand-off.</p>
+  <div class="cols3">
+    <div class="lane">
+      <span class="tag m">MOBILE</span>
+      <h3 style="margin-top:2.5mm">Android &amp; iOS apps</h3>
+      <div class="sub">React Native CLI &amp; Expo, one TypeScript codebase</div>
+      <ul class="ticks">
+        <li>Live tracking with Google Maps, Socket.IO &amp; GraphQL subscriptions</li>
+        <li>Payments, wallets, OTP &amp; Google Sign-In</li>
+        <li>EAS Build/Submit, OTA updates, forced-update flows</li>
+        <li>In-app AI assistants wired to real actions</li>
+      </ul>
+      <div class="chips"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">Redux</span><span class="chip">Apollo</span></div>
+    </div>
+    <div class="lane w">
+      <span class="tag w">WEB</span>
+      <h3 style="margin-top:2.5mm">Next.js websites &amp; admin panels</h3>
+      <div class="sub">App Router, React 18/19, server &amp; client components</div>
+      <ul class="ticks w">
+        <li>Customer ordering sites: search, cart, checkout, wallet, live order map</li>
+        <li>Admin dashboards: orders, dispatch, zones, pricing, payouts, reports</li>
+        <li>Role-based staff access, multi-language UI with next-intl</li>
+        <li>Middleware for auth, locale routing &amp; bot protection</li>
+      </ul>
+      <div class="chips"><span class="chip w">Next.js</span><span class="chip w">Tailwind</span><span class="chip w">shadcn/Radix</span><span class="chip w">PrimeReact</span></div>
+    </div>
+    <div class="lane b">
+      <span class="tag b">BACKEND</span>
+      <h3 style="margin-top:2.5mm">APIs that back them</h3>
+      <div class="sub">So the app never stalls waiting on an endpoint</div>
+      <ul class="ticks">
+        <li>NestJS modules, REST &amp; GraphQL endpoints</li>
+        <li>TypeORM / PostgreSQL and MongoDB models</li>
+        <li>WebSocket gateways for live orders &amp; support chat</li>
+        <li>Push notifications with Expo &amp; FCM</li>
+      </ul>
+      <div class="chips"><span class="chip b">NestJS</span><span class="chip b">GraphQL</span><span class="chip b">PostgreSQL</span><span class="chip b">Socket.IO</span></div>
+    </div>
+  </div>
+  <div class="index">
+    <div><span class="tag m">APP</span><b style="margin-top:1.5mm">Lumi</b><span>AI ride-hailing, customer + driver apps</span></div>
+    <div><span class="tag m">APP</span><b style="margin-top:1.5mm">Borku</b><span>Multi-vendor delivery, 3 apps</span></div>
+    <div><span class="tag m">APP</span> <span class="tag w">WEB</span><b style="margin-top:1.5mm">Odda &amp; Intercargo</b><span>Courier app + freight portal</span></div>
+    <div><span class="tag w">WEB</span> <span class="tag m">APP</span><b style="margin-top:1.5mm">Sipp</b><span>Next.js site, admin &amp; apps</span></div>
+    <div><span class="tag w">WEB</span> <span class="tag m">APP</span><b style="margin-top:1.5mm">Yalla</b><span>Admin v2, website &amp; apps</span></div>
+    <div><span class="tag w">WEB</span> <span class="tag m">APP</span><b style="margin-top:1.5mm">Eatmile</b><span>Super-admin, website &amp; apps</span></div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>02</span></div>
+</section>
+
+<!-- 03 Lumi -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow"><span class="tag m">APP</span> Project 01 · Ride-hailing · AI</div>
+    <h2>Lumi — AI-Powered Ride-Hailing</h2>
+    <p class="desc">Two production apps for Android and iOS (customer and driver) sharing one real-time layer, with an AI assistant that books rides from a plain-language chat.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">Redux</span><span class="chip">Google Maps</span>
+      <span class="chip">WebSockets</span><span class="chip">Firebase</span><span class="chip">Twilio</span><span class="chip">LLM tool calling</span>
+    </div>
+    <ul class="ticks">
+      <li>AI chat turns “I need a ride to the mall” into a confirmed booking: parses pickup and drop-off, quotes the fare, and dispatches</li>
+      <li>AI wired to the real booking pipeline via tool calling, so it uses the same validation as the manual flow</li>
+      <li>Customer app: booking, fare tiers with name-your-price, live driver tracking</li>
+      <li>Driver app: registration, incoming offers with counter-offer, live navigation</li>
+      <li>Driver subscription plans with payment gateway integration</li>
+    </ul>
+    <p class="status">● Live on Google Play</p>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/lumi/ai-chat-booking.webp" alt=""><figcaption>AI assistant booking a ride</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/ride-booking.webp" alt=""><figcaption>Ride booking with live map</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/fare-selection.webp" alt=""><figcaption>Fare tiers &amp; name-your-price</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>03</span></div>
+</section>
+
+<!-- 04 Lumi gallery -->
+<section class="page">
+  <div class="gallery-head"><h2>Lumi — super app &amp; driver experience</h2><span>Customer + driver apps · Android &amp; iOS</span></div>
+  <div class="gallery">
+    <figure class="shot"><img src="../public/projects/lumi/super-app-home.webp" alt=""><figcaption>Super-app home: many services, one shell</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/driver-ride-offer.webp" alt=""><figcaption>Driver app: incoming request &amp; counter-offer</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/driver-live-tracking.webp" alt=""><figcaption>Driver app: live navigation &amp; tracking</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>04</span></div>
+</section>
+
+<!-- 05 Borku -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow"><span class="tag m">APP</span> Project 02 · Food &amp; grocery delivery</div>
+    <h2>Borku — Multi-Vendor Delivery</h2>
+    <p class="desc">Three production apps (customer, rider, and the Partner Hub store app) driven by one GraphQL API with real-time subscriptions.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">GraphQL</span><span class="chip">Apollo</span>
+      <span class="chip">Subscriptions</span><span class="chip">Redux</span><span class="chip">Google Maps</span>
+    </div>
+    <ul class="ticks">
+      <li>End-to-end order flow: store accepts, riders are notified and assigned, and timing updates reach the customer live</li>
+      <li>GraphQL subscriptions keep every device in sync, with no polling</li>
+      <li>Customer app: multi-vendor catalog, offers &amp; credit, cart, doorstep tracking</li>
+      <li>Partner Hub: taking-orders toggle, earnings, ratings, menu &amp; stock</li>
+      <li>Rider app: assignments, live progress, earnings &amp; withdrawals</li>
+    </ul>
+    <p class="status">● Live on the App Store and Google Play</p>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/borku/order-progress.webp" alt=""><figcaption>Live order lifecycle</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/borku/customer-offers.webp" alt=""><figcaption>Offers, categories &amp; picks</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/borku/partner-hub-dashboard.webp" alt=""><figcaption>Partner Hub dashboard</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>05</span></div>
+</section>
+
+<!-- 06 Odda -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow"><span class="tag m">APP</span> Project 03 · Logistics · UK courier</div>
+    <h2>Odda — Same-Day Courier App</h2>
+    <p class="desc">An on-demand courier app for the UK, paired with the Intercargo freight portal: book a parcel, collect live quotes from nearby drivers, and follow it door to door.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">SignalR</span><span class="chip">Redux</span>
+      <span class="chip">JWT Auth</span><span class="chip">REST APIs</span><span class="chip w">Angular</span>
+    </div>
+    <ul class="ticks">
+      <li>Real-time tracking over SignalR: driver location, ETAs, and status pushed as they happen</li>
+      <li>Live quotes: a booking fans out to nearby drivers and returns competing offers in seconds</li>
+      <li>Booking flow with detour stops, cargo details, and ASAP / at / by / between scheduling</li>
+      <li>Active, completed, and cancelled bookings, plus push notifications for every milestone</li>
+    </ul>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/odda/live-tracking.webp" alt=""><figcaption>Live vehicle tracking</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/odda/live-quotes.webp" alt=""><figcaption>Live quotes from drivers</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/odda/deliveries-list.webp" alt=""><figcaption>Bookings &amp; job details</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>06</span></div>
+</section>
+
+<!-- 07 Intercargo web -->
+<section class="page">
+  <div class="gallery-head"><h2><span class="tag w" style="vertical-align:middle;margin-right:2mm">WEB</span>Intercargo — freight portal</h2><span>Shipment tracking · schedules · quotes across air, sea &amp; road</span></div>
+  <div class="web2">
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>intercargo.com</span></div><img src="../public/projects/intercargo/web-hero-tracking.webp" alt=""></div><figcaption>Shipment tracking and schedules</figcaption></figure>
+    <div class="stack">
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>Solutions</span></div><img src="../public/projects/intercargo/web-solutions.webp" alt=""></div><figcaption>Real-time order tracking solutions</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>Platform</span></div><img src="../public/projects/intercargo/web-freight-platform.webp" alt=""></div><figcaption>Digital freight platform dashboard</figcaption></figure>
+    </div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>07</span></div>
+</section>
+
+<!-- 08 Web divider -->
+<section class="page divider">
+  <div class="eyebrow">Part two · Web development</div>
+  <h2>Next.js websites &amp; admin dashboards</h2>
+  <p>Alongside the apps, I build the web side of the same delivery platforms: the customer website people order from and the admin panel operators run the business on. Over 110 of my commits across six Next.js codebases.</p>
+  <table class="plat">
+    <tr><th>Platform</th><th>Admin dashboard</th><th>Customer website</th><th>Stack</th></tr>
+    <tr><td><b>Sipp</b><br><small>Costa Rica · food &amp; grocery</small></td><td>Stores, products &amp; add-ons, coupons, finance reports, live rider map</td><td>Ordering site: search, checkout, wallet, live order map</td><td><small>Next.js 16 · React 19 · Tailwind · shadcn/Radix · TanStack Query · next-intl</small></td></tr>
+    <tr><td><b>Yalla</b><br><small>Multi-vendor delivery</small></td><td>Admin v2: dispatch, zones, delivery pricing, staff roles, support chat, force-update</td><td>Login flows, saved cards, auto location at checkout, bot protection</td><td><small>Next.js 14 · Apollo GraphQL · PrimeReact · Tailwind · next-intl</small></td></tr>
+    <tr><td><b>Eatmile</b><br><small>Deliveries super-platform</small></td><td>Super-admin: rider incidents, COD settlements, payouts, activity logs, tax</td><td>Order changes, coupons, busy mode, delivery-zone coverage</td><td><small>Next.js 16 · React 19 · Zustand · TanStack Query · Socket.IO · Stripe</small></td></tr>
+  </table>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>08</span></div>
+</section>
+
+<!-- 09 Sipp -->
+<section class="page">
+  <div class="wproj">
+    <div class="text">
+      <div class="eyebrow web"><span class="tag w">WEB</span> <span class="tag m">APP</span> Project 04 · Food &amp; grocery</div>
+      <h2>Sipp — Next.js Website &amp; Admin</h2>
+      <p class="desc">The customer ordering website and the operator dashboard for a delivery platform live in Costa Rica, built on Next.js 16 and React 19 and sharing an API with the mobile apps.</p>
+      <div class="chips">
+        <span class="chip w">Next.js 16</span><span class="chip w">React 19</span><span class="chip w">Tailwind</span><span class="chip w">shadcn/Radix</span>
+        <span class="chip w">TanStack Query</span><span class="chip w">next-intl</span><span class="chip">Socket.IO</span><span class="chip">Google Maps</span>
+      </div>
+      <ul class="ticks w">
+        <li><b>Website:</b> live rider location on the order map with stale-GPS handling and outlier filtering</li>
+        <li><b>Website:</b> one-time session-expiry handling, logged-in redirects, order notes kept between cart and checkout</li>
+        <li><b>Website:</b> fixed hydration errors and an endless store-page load when no location was set</li>
+        <li><b>Admin:</b> real-time rider tracking hook for the operations map</li>
+        <li><b>Admin:</b> min/max selection limits for add-ons; refund and reconciliation columns in financial reports</li>
+        <li>Resolved 30+ issues from a client QA audit across both the admin and the website: coupons, stores, wizards, i18n</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>Sipp · home</span></div><img src="../public/projects/sipp/web-home.jpg" alt="" style="height:68mm;object-fit:cover;object-position:top"></div><figcaption>Customer website: address-first ordering, delivery zones, language switcher</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>Sipp · categories</span></div><img src="../public/projects/sipp/web-categories.jpg" alt="" style="height:54mm;object-fit:cover;object-position:top"></div><figcaption>Restaurants and grocery verticals from one storefront</figcaption></figure>
+    </div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>09</span></div>
+</section>
+
+<!-- 10 Yalla -->
+<section class="page">
+  <div class="wproj">
+    <div class="text">
+      <div class="eyebrow web"><span class="tag w">WEB</span> <span class="tag m">APP</span> Project 05 · Multi-vendor delivery</div>
+      <h2>Yalla — Admin v2, Website &amp; Apps</h2>
+      <p class="desc">I work across all of Yalla: the Next.js admin dashboard (Admin v2), the customer website, and the customer, rider and store apps, all on one GraphQL API.</p>
+      <div class="chips">
+        <span class="chip w">Next.js 14</span><span class="chip w">Apollo Client</span><span class="chip w">GraphQL WS</span><span class="chip w">PrimeReact</span>
+        <span class="chip w">Tailwind</span><span class="chip w">next-intl</span><span class="chip w">Cypress</span><span class="chip">React Native</span>
+      </div>
+      <ul class="ticks w">
+        <li>Staff land on the first page their permissions allow, not a /forbidden bounce</li>
+        <li>Support chat in admin moved to GraphQL subscriptions with socket reconnection and live updates</li>
+        <li>Banking-style forced update: admin sets minimum versions, apps compare the installed binary</li>
+        <li>Website: new login flows, saved cards, automatic location at checkout, image protection &amp; bot filtering in middleware</li>
+        <li>Fixed a hydration error from a nested &lt;html&gt; in the localized layout</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>Yalla Admin v2 · modules I built</span></div>
+        <div class="admin">
+          <div class="side">
+            <div class="logo">Yalla Admin</div>
+            <div class="i on">Dispatch</div><div class="i">Zones</div><div class="i">Delivery pricing</div><div class="i">Discovery</div><div class="i">Catalog</div><div class="i">Staff &amp; roles</div><div class="i">Support</div><div class="i">App versions</div>
+          </div>
+          <div class="main">
+            <div class="t">Modules I built or extended</div>
+            <div class="mods">
+              <div class="mod"><b>Dispatch</b><span>Stable rider list while scrolling; refresh waits until closed</span></div>
+              <div class="mod"><b>Zones &amp; staff access</b><span>Zone management with per-staff permission routing</span></div>
+              <div class="mod"><b>Delivery pricing</b><span>Configure and manage delivery fee rules</span></div>
+              <div class="mod"><b>Discovery sections</b><span>Store limits, infinite scroll over every eligible store</span></div>
+              <div class="mod"><b>Catalog ordering</b><span>Reorder products within categories; name-length validation</span></div>
+              <div class="mod"><b>Account security</b><span>Reset rider &amp; store passwords; stored passwords never shown</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i><span>Yalla · customer website</span></div><img src="../public/projects/yalla/web-home.jpg" alt="" style="height:58mm;object-fit:cover;object-position:center 58%"></div><figcaption>Customer website: city search, current location, saved addresses</figcaption></figure>
+    </div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>10</span></div>
+</section>
+
+<!-- 11 Eatmile -->
+<section class="page">
+  <div class="wproj">
+    <div class="text">
+      <div class="eyebrow web"><span class="tag w">WEB</span> <span class="tag m">APP</span> <span class="tag b">API</span> Project 06 · Deliveries</div>
+      <h2>Eatmile — Super-Admin, Website &amp; Apps</h2>
+      <p class="desc">A full delivery platform where I contribute everywhere: the Next.js super-admin, the customer website, the rider and store apps, and the NestJS backend modules behind them.</p>
+      <div class="chips">
+        <span class="chip w">Next.js 16</span><span class="chip w">React 19</span><span class="chip w">shadcn/Radix</span><span class="chip w">Zustand</span>
+        <span class="chip w">TanStack Query</span><span class="chip w">Recharts</span><span class="chip">React Native</span><span class="chip b">NestJS</span>
+      </div>
+      <ul class="ticks w">
+        <li><b>Website:</b> order modifications, mixed-case coupon codes, restaurant busy mode, delivery-zone coverage on addresses</li>
+        <li><b>Website:</b> shop-type discovery cards and German localization</li>
+        <li><b>Apps:</b> rider wallet &amp; withdrawals, store app order handling</li>
+        <li><b>Backend:</b> rider-incident and support-chat modules, order entities &amp; migrations</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>Eatmile Super-Admin · modules I built</span></div>
+        <div class="admin">
+          <div class="side">
+            <div class="logo">Eatmile</div>
+            <div class="i">Orders</div><div class="i on">Rider incidents</div><div class="i">Support tickets</div><div class="i">COD settlements</div><div class="i">Withdrawals</div><div class="i">Activity logs</div><div class="i">Riders</div><div class="i">Company &amp; tax</div>
+          </div>
+          <div class="main">
+            <div class="t">Modules I built or extended</div>
+            <div class="mods">
+              <div class="mod"><b>Rider incident board</b><span>Incident queue with support-hold badges on orders</span></div>
+              <div class="mod"><b>Support case view</b><span>Ticket cases with rider management in context</span></div>
+              <div class="mod"><b>COD settlements</b><span>Cash-on-delivery exceptions with courier code badges</span></div>
+              <div class="mod"><b>Withdrawal requests</b><span>Payout handling with pending counts in the sidebar</span></div>
+              <div class="mod"><b>Rider activity</b><span>Performance insights and activity-log timeline</span></div>
+              <div class="mod"><b>Company &amp; tax settings</b><span>Company profile and tax configuration forms</span></div>
+              <div class="mod"><b>Order codes</b><span>Consistent order-code format across every screen</span></div>
+              <div class="mod"><b>Critical fixes</b><span>Two bug-fix releases across orders &amp; support</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Admin panels are private and behind login, so this page lists the modules from my commits rather than showing screenshots.</p>
+    </div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>11</span></div>
+</section>
+
+<!-- 12 Enatega + stack + CTA -->
+<section class="page">
+  <div class="eyebrow"><span class="tag m">APP</span> <span class="tag w">WEB</span> Project 07 · Super app</div>
+  <h2>Enatega — Super App &amp; Delivery Ecosystem</h2>
+  <p style="max-width:230mm;margin-top:2mm">A production commerce ecosystem on the Play Store: customer super app, rider app, restaurant app, admin panel, and NestJS backend.</p>
+  <div class="two">
+    <ul class="ticks" style="font-size:9.1pt">
+      <li>Expo shell hosting independent mini-apps through a generated registry, with shared auth, navigation, and design system</li>
+      <li>Deliveries mini-app across three storefront modes from one component layer, cutting duplicate code by ~40%</li>
+      <li>Live order and rider tracking over Socket.IO with Google Maps; Expo &amp; FCM push</li>
+      <li>Stripe, cash, and wallet payments; OTP and Google Sign-In; EN/FR localization; OTA via EAS Update</li>
+    </ul>
+    <div>
+      <div class="tech-row"><h3>Mobile</h3><div class="chips"><span class="chip">React Native CLI</span><span class="chip">Expo / EAS</span><span class="chip">TypeScript</span><span class="chip">React Navigation</span><span class="chip">FlashList</span><span class="chip">Reanimated</span></div></div>
+      <div class="tech-row"><h3>Web</h3><div class="chips"><span class="chip w">Next.js (App Router)</span><span class="chip w">React 19</span><span class="chip w">Tailwind</span><span class="chip w">shadcn/Radix</span><span class="chip w">PrimeReact</span><span class="chip w">next-intl</span><span class="chip w">Chart.js / Recharts</span></div></div>
+      <div class="tech-row"><h3>State &amp; data</h3><div class="chips"><span class="chip">Redux Toolkit</span><span class="chip">TanStack Query</span><span class="chip">Zustand</span><span class="chip">Apollo / GraphQL</span><span class="chip">Socket.IO</span></div></div>
+      <div class="tech-row"><h3>Backend &amp; integrations</h3><div class="chips"><span class="chip b">NestJS</span><span class="chip b">TypeORM</span><span class="chip b">PostgreSQL</span><span class="chip b">MongoDB</span><span class="chip">Stripe</span><span class="chip">Firebase</span><span class="chip">Google Maps</span><span class="chip">LLM APIs</span></div></div>
+    </div>
+  </div>
+  <div class="cta">
+    <div>
+      <h3>Need the app and the web side built together?</h3>
+      <p>I can take your product across Android, iOS, the customer website and the admin panel, on one API and one plan. Message me to walk through your requirements.</p>
+    </div>
+    <div class="pill">Message me on Upwork →</div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile &amp; Web Portfolio</span><span>12</span></div>
+</section>
+
+</body>
+</html>

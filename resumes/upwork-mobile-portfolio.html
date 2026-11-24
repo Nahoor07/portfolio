@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nahoor Tahir — Mobile App Portfolio</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root {
+    --ink: #0f1b3d; --body: #3a4560; --muted: #6b7690; --line: #dfe4ee;
+    --accent: #2563eb; --accent-soft: #eef3ff; --bg: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body {
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--body); font-size: 10.5pt; line-height: 1.5;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 297mm; height: 210mm; padding: 14mm 16mm 12mm;
+    position: relative; overflow: hidden; page-break-after: always;
+    display: flex; flex-direction: column;
+  }
+  .page:last-child { page-break-after: auto; }
+  .footer {
+    position: absolute; left: 16mm; right: 16mm; bottom: 7mm;
+    display: flex; justify-content: space-between;
+    font-size: 7.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 2.5mm;
+  }
+  h1, h2, h3 { color: var(--ink); line-height: 1.15; }
+  h2 { font-size: 22pt; letter-spacing: -.01em; }
+  h3 { font-size: 11pt; }
+  .eyebrow {
+    font-size: 8pt; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 3mm;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+  .chip {
+    font-size: 7.8pt; font-weight: 600; color: var(--accent);
+    background: var(--accent-soft); border-radius: 99px; padding: .8mm 3mm;
+  }
+  ul.ticks { list-style: none; }
+  ul.ticks li { position: relative; padding-left: 5mm; margin-bottom: 1.8mm; }
+  ul.ticks li::before {
+    content: ""; position: absolute; left: 0; top: 1.9mm;
+    width: 2mm; height: 2mm; border-radius: 50%; background: var(--accent);
+  }
+
+  /* Cover */
+  .cover { flex-direction: row; gap: 12mm; padding: 0 0 0 16mm; }
+  .cover .left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 14mm 0; }
+  .cover h1 { font-size: 40pt; letter-spacing: -.02em; margin-bottom: 2mm; }
+  .cover .role { font-size: 15pt; color: var(--body); margin-bottom: 7mm; }
+  .cover .lede { font-size: 12pt; max-width: 135mm; margin-bottom: 9mm; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; max-width: 150mm; margin-bottom: 9mm; }
+  .stat { border-left: 2px solid var(--accent); padding-left: 3mm; }
+  .stat b { display: block; font-size: 18pt; color: var(--ink); line-height: 1.1; }
+  .stat span { font-size: 8pt; color: var(--muted); }
+  .cover .right {
+    width: 118mm; background: linear-gradient(160deg, #1d4ed8, #0f1b3d);
+    display: flex; align-items: center; justify-content: center; gap: 5mm; padding: 10mm;
+  }
+  .cover .right img { width: 46mm; border-radius: 4mm; box-shadow: 0 6mm 14mm rgba(0,0,0,.35); }
+  .cover .right img:nth-child(2) { margin-top: 30mm; }
+
+  /* Capabilities */
+  .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; margin-top: 8mm; }
+  .cap { border: 1px solid var(--line); border-radius: 3mm; padding: 5mm; }
+  .cap h3 { margin-bottom: 1.5mm; }
+  .cap p { font-size: 9.3pt; }
+  .index { margin-top: 8mm; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .index div { background: var(--accent-soft); border-radius: 3mm; padding: 4mm; }
+  .index b { display: block; color: var(--ink); font-size: 10pt; }
+  .index span { font-size: 8.5pt; color: var(--muted); }
+
+  /* Project page */
+  .proj { flex-direction: row; gap: 10mm; }
+  .proj .text { width: 98mm; flex-shrink: 0; display: flex; flex-direction: column; }
+  .proj h2 { margin-bottom: 2mm; }
+  .proj .desc { margin: 2mm 0 5mm; font-size: 10pt; }
+  .proj .status { font-size: 8.5pt; color: var(--muted); margin-top: 3mm; }
+  .proj ul.ticks { font-size: 9.3pt; margin-top: 4mm; }
+  .shots { flex: 1; display: flex; gap: 5mm; align-items: flex-start; justify-content: center; padding-bottom: 8mm; }
+  .shot { flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 58mm; }
+  .shot img { width: 100%; border-radius: 3mm; border: 1px solid var(--line); display: block; }
+  .shot figcaption { font-size: 8pt; color: var(--muted); text-align: center; margin-top: 2mm; line-height: 1.35; }
+  .shots.tall .shot img { max-height: 160mm; width: auto; max-width: 100%; }
+
+  /* Gallery page */
+  .gallery-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6mm; }
+  .gallery-head h2 { font-size: 16pt; }
+  .gallery-head span { font-size: 9pt; color: var(--muted); }
+  .gallery { flex: 1; display: flex; gap: 6mm; justify-content: center; align-items: flex-start; padding-bottom: 8mm; }
+  .gallery { align-items: center; }
+  .gallery .shot { flex: 0 0 auto; max-width: none; }
+  .gallery .shot img { height: 138mm; width: auto; }
+  .cover .footer { right: 134mm; }
+  .proj { align-items: center; }
+  .proj .shots { align-items: center; padding-bottom: 4mm; }
+  .proj .shot { max-width: 52mm; }
+  .web { align-items: center; }
+
+  .web { display: grid; grid-template-columns: 1.25fr 1fr; gap: 6mm; flex: 1; padding-bottom: 8mm; }
+  .web .stack { display: flex; flex-direction: column; gap: 5mm; }
+  .web figure img { width: 100%; border-radius: 2.5mm; border: 1px solid var(--line); display: block; }
+  .web figcaption { font-size: 8pt; color: var(--muted); margin-top: 1.5mm; }
+
+  /* Closing */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 6mm; }
+  .tech-row { margin-bottom: 5mm; }
+  .tech-row h3 { margin-bottom: 2mm; font-size: 10pt; }
+  .cta {
+    margin-top: auto; margin-bottom: 8mm; background: var(--ink); color: #dbe4ff;
+    border-radius: 4mm; padding: 7mm 9mm;
+  }
+  .cta h3 { color: #fff; font-size: 15pt; margin-bottom: 2mm; }
+  .cta p { font-size: 10pt; max-width: 200mm; }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover -->
+<section class="page cover">
+  <div class="left">
+    <div class="eyebrow">Mobile App Development Portfolio</div>
+    <h1>Nahoor Tahir</h1>
+    <div class="role">React Native Developer · Android &amp; iOS</div>
+    <p class="lede">I build and ship production mobile apps end to end — real-time ride-hailing, multi-vendor delivery, logistics, and AI-powered features — from first screen to Play Store and App Store release.</p>
+    <div class="stats">
+      <div class="stat"><b>4+</b><span>Years building products</span></div>
+      <div class="stat"><b>8+</b><span>Apps live on the stores</span></div>
+      <div class="stat"><b>4</b><span>Companies shipped across</span></div>
+      <div class="stat"><b>2</b><span>Platforms, one codebase</span></div>
+    </div>
+    <div class="chips">
+      <span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">TypeScript</span>
+      <span class="chip">Redux Toolkit</span><span class="chip">GraphQL</span><span class="chip">Socket.IO</span>
+      <span class="chip">Google Maps</span><span class="chip">Firebase</span><span class="chip">AI integration</span>
+    </div>
+  </div>
+  <div class="right">
+    <img src="../public/projects/lumi/ai-chat-booking.webp" alt="">
+    <img src="../public/projects/borku/order-progress.webp" alt="">
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>01</span></div>
+</section>
+
+<!-- 2. What I do -->
+<section class="page">
+  <div class="eyebrow">What I bring to your project</div>
+  <h2>From idea to a shipped, stable app</h2>
+  <p style="max-width:200mm;margin-top:3mm">I own features across the whole mobile lifecycle — UI, state, API integration, device features, and release — and I can contribute to the backend too, so your app doesn't stall waiting on an API.</p>
+  <div class="cap-grid">
+    <div class="cap"><h3>Cross-platform apps</h3><p>React Native CLI and Expo apps for Android and iOS, with EAS Build, OTA updates, and store submission.</p></div>
+    <div class="cap"><h3>Real-time &amp; location</h3><p>Live order, rider, and vehicle tracking with Google Maps, Socket.IO, SignalR, and GraphQL subscriptions.</p></div>
+    <div class="cap"><h3>AI-powered features</h3><p>In-app AI assistants wired to real app actions through tool calling — e.g. booking a ride straight from a chat.</p></div>
+    <div class="cap"><h3>Payments &amp; auth</h3><p>Stripe, wallets, OTP via Twilio, Google Sign-In, and JWT sessions with secure token storage.</p></div>
+    <div class="cap"><h3>Performance</h3><p>FlashList virtualization and render profiling — 25–30% smoother scrolling on low-end devices.</p></div>
+    <div class="cap"><h3>Backend support</h3><p>NestJS modules, REST &amp; GraphQL endpoints, TypeORM/PostgreSQL, and push notifications (Expo, FCM).</p></div>
+  </div>
+  <div class="index">
+    <div><b>Lumi</b><span>AI ride-hailing · customer + driver apps</span></div>
+    <div><b>Borku</b><span>Multi-vendor delivery · 3 apps</span></div>
+    <div><b>Odda &amp; Intercargo</b><span>Same-day courier app + freight portal</span></div>
+    <div><b>Enatega</b><span>Super app &amp; delivery ecosystem</span></div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>02</span></div>
+</section>
+
+<!-- 3. Lumi -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow">Project 01 · Ride-hailing · AI</div>
+    <h2>Lumi — AI-Powered Ride-Hailing</h2>
+    <p class="desc">Two production apps for Android and iOS — a customer app and a driver app sharing one real-time layer — with an AI assistant that books rides from a plain-language chat.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">Redux</span><span class="chip">Google Maps</span>
+      <span class="chip">WebSockets</span><span class="chip">Firebase</span><span class="chip">Twilio</span><span class="chip">LLM tool calling</span>
+    </div>
+    <ul class="ticks">
+      <li>AI chat assistant turns “I need a ride to the mall” into a confirmed booking — parses pickup and drop-off, quotes the fare, and dispatches</li>
+      <li>AI wired to the real booking pipeline via tool calling, so it uses the same validation as the manual flow</li>
+      <li>Customer app: booking, fare tiers with name-your-price, and live driver tracking</li>
+      <li>Driver app: registration, incoming offers with counter-offer, and live navigation</li>
+      <li>Firebase Auth, Twilio OTP, and Expo push notifications</li>
+    </ul>
+    <p class="status">Live on Google Play</p>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/lumi/ai-chat-booking.webp" alt=""><figcaption>AI assistant booking a ride</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/ride-booking.webp" alt=""><figcaption>Ride booking with live map</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/fare-selection.webp" alt=""><figcaption>Fare tiers &amp; name-your-price</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>03</span></div>
+</section>
+
+<section class="page">
+  <div class="gallery-head"><h2>Lumi — super app &amp; driver experience</h2><span>Customer + driver apps · Android &amp; iOS</span></div>
+  <div class="gallery">
+    <figure class="shot"><img src="../public/projects/lumi/super-app-home.webp" alt=""><figcaption>Super-app home — many services, one shell</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/driver-ride-offer.webp" alt=""><figcaption>Driver app — incoming request &amp; counter-offer</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/lumi/driver-live-tracking.webp" alt=""><figcaption>Driver app — live navigation &amp; tracking</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>04</span></div>
+</section>
+
+<!-- 4. Borku -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow">Project 02 · Food &amp; grocery delivery</div>
+    <h2>Borku — Multi-Vendor Delivery</h2>
+    <p class="desc">Three production apps — customer, rider, and the Partner Hub store app — all driven by one GraphQL API with real-time subscriptions.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">GraphQL</span><span class="chip">Apollo</span>
+      <span class="chip">Subscriptions</span><span class="chip">Redux</span><span class="chip">Google Maps</span>
+    </div>
+    <ul class="ticks">
+      <li>End-to-end order flow: store accepts, riders are notified and assigned, and timing updates reach the customer live</li>
+      <li>GraphQL subscriptions keep every device in sync — no polling</li>
+      <li>Customer app: multi-vendor catalog, offers &amp; credit, cart, doorstep tracking</li>
+      <li>Partner Hub: taking-orders toggle, earnings, ratings, menu &amp; stock</li>
+      <li>Rider app: assignments, live progress, earnings &amp; withdrawals</li>
+    </ul>
+    <p class="status">Live on the App Store and Google Play</p>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/borku/order-progress.webp" alt=""><figcaption>Live order lifecycle</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/borku/customer-offers.webp" alt=""><figcaption>Offers, categories &amp; picks</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/borku/partner-hub-dashboard.webp" alt=""><figcaption>Partner Hub dashboard</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>05</span></div>
+</section>
+
+<!-- 5. Odda & Intercargo -->
+<section class="page proj">
+  <div class="text">
+    <div class="eyebrow">Project 03 · Logistics · UK courier</div>
+    <h2>Odda — Same-Day Courier App</h2>
+    <p class="desc">An on-demand courier app for the UK, paired with the Intercargo freight portal: book a parcel, collect live quotes from nearby drivers, and follow it door to door.</p>
+    <div class="chips">
+      <span class="chip">React Native CLI</span><span class="chip">SignalR</span><span class="chip">Redux</span>
+      <span class="chip">JWT Auth</span><span class="chip">REST APIs</span><span class="chip">Angular</span>
+    </div>
+    <ul class="ticks">
+      <li>Real-time tracking over SignalR — driver location, ETAs, and status pushed as they happen</li>
+      <li>Live quotes: a booking fans out to nearby drivers and returns competing offers in seconds</li>
+      <li>Booking flow with detour stops, cargo details, and ASAP / at / by / between scheduling</li>
+      <li>Active, completed, and cancelled bookings, plus push notifications for every milestone</li>
+    </ul>
+  </div>
+  <div class="shots">
+    <figure class="shot"><img src="../public/projects/odda/live-tracking.webp" alt=""><figcaption>Live vehicle tracking</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/odda/live-quotes.webp" alt=""><figcaption>Live quotes from drivers</figcaption></figure>
+    <figure class="shot"><img src="../public/projects/odda/deliveries-list.webp" alt=""><figcaption>Bookings &amp; job details</figcaption></figure>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>06</span></div>
+</section>
+
+<section class="page">
+  <div class="gallery-head"><h2>Intercargo — freight portal (web)</h2><span>Shipment tracking · schedules · quotes across air, sea &amp; road</span></div>
+  <div class="web">
+    <figure><img src="../public/projects/intercargo/web-hero-tracking.webp" alt=""><figcaption>Shipment tracking and schedules</figcaption></figure>
+    <div class="stack">
+      <figure><img src="../public/projects/intercargo/web-solutions.webp" alt=""><figcaption>Real-time order tracking solutions</figcaption></figure>
+      <figure><img src="../public/projects/intercargo/web-freight-platform.webp" alt=""><figcaption>Digital freight platform dashboard</figcaption></figure>
+    </div>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>07</span></div>
+</section>
+
+<!-- 6. Enatega + tech + CTA -->
+<section class="page">
+  <div class="eyebrow">Project 04 · Super app</div>
+  <h2>Enatega — Super App &amp; Delivery Ecosystem</h2>
+  <p style="max-width:220mm;margin-top:2mm">A production commerce ecosystem on the Play Store: customer super app, rider app, restaurant app, admin panel, and NestJS backend.</p>
+  <div class="two">
+    <ul class="ticks" style="font-size:9.3pt">
+      <li>Expo shell hosting independent mini-apps through a generated registry — shared auth, navigation, and design system</li>
+      <li>Deliveries mini-app across three storefront modes from one component layer, cutting duplicate code by ~40%</li>
+      <li>Live order and rider tracking over Socket.IO with Google Maps; Expo &amp; FCM push</li>
+      <li>Stripe, cash, and wallet payments; OTP and Google Sign-In; EN/FR localization; OTA via EAS Update</li>
+    </ul>
+    <div>
+      <div class="tech-row"><h3>Mobile</h3><div class="chips"><span class="chip">React Native CLI</span><span class="chip">Expo / EAS</span><span class="chip">TypeScript</span><span class="chip">React Navigation</span><span class="chip">FlashList</span></div></div>
+      <div class="tech-row"><h3>State &amp; data</h3><div class="chips"><span class="chip">Redux Toolkit</span><span class="chip">TanStack Query</span><span class="chip">Zustand</span><span class="chip">GraphQL / Apollo</span></div></div>
+      <div class="tech-row"><h3>Integrations</h3><div class="chips"><span class="chip">Google Maps</span><span class="chip">Socket.IO</span><span class="chip">Firebase</span><span class="chip">Stripe</span><span class="chip">Twilio</span><span class="chip">FCM</span><span class="chip">LLM APIs</span></div></div>
+      <div class="tech-row"><h3>Backend</h3><div class="chips"><span class="chip">NestJS</span><span class="chip">TypeORM</span><span class="chip">PostgreSQL</span><span class="chip">REST</span></div></div>
+    </div>
+  </div>
+  <div class="cta">
+    <h3>Let's build your app.</h3>
+    <p>I'm happy to walk through your requirements, map out the core user flows, and suggest a practical plan to ship on Android and iOS. Message me here on Upwork to get started.</p>
+  </div>
+  <div class="footer"><span>Nahoor Tahir · Mobile App Portfolio</span><span>08</span></div>
+</section>
+
+</body>
+</html>

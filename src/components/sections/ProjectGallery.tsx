@@ -51,13 +51,18 @@ export function ProjectGallery({
   }, [isOpen, close, step]);
 
   const active = openIndex === null ? null : images[openIndex];
+  // Website-only galleries get large landscape tiles instead of the phone-sized grid.
+  const allWide = images.every((image) => image.wide);
 
   return (
     <>
       {/* auto-fill adapts to the card's own width, so half-width cards don't get postage-stamp tiles. */}
       <div
         className={cn(
-          "grid grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))] gap-3",
+          "grid gap-3",
+          allWide
+            ? "grid-cols-1 sm:grid-cols-2"
+            : "grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))]",
           className,
         )}
       >
@@ -70,7 +75,9 @@ export function ProjectGallery({
             className={cn(
               "group/shot relative w-full overflow-hidden rounded-xl border border-border bg-surface transition-all hover:border-accent focus-visible:border-accent focus-visible:outline-none",
               // Web captures are landscape, so they take two columns instead of one.
-              image.wide ? "col-span-2 aspect-16/10" : "aspect-9/16",
+              image.wide ? "aspect-16/10" : "aspect-9/16",
+              image.wide && !allWide && "col-span-2",
+              allWide && images.length === 1 && "sm:col-span-2",
             )}
           >
             <Image

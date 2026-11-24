@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bug Audit &amp; Fix Report — Nahoor Tahir</title>
+<style>
+  @page { size: A4; margin: 14mm 16mm 14mm; }
+  :root { --ink:#1f2937; --body:#374151; --muted:#6b7280; --line:#e2e6ec; --head:#eef2f6;
+          --green:#166534; --crit:#b91c1c; --high:#c2410c; --med:#a16207; --low:#475569; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--body);
+         font-size:9.6pt; line-height:1.45; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  h1 { font-size:23pt; color:var(--ink); letter-spacing:-.01em; }
+  .sub { color:var(--muted); font-size:10pt; margin:1mm 0 5mm; }
+  .sub b { color:var(--ink); }
+  h2 { color:var(--green); font-size:13pt; margin:6mm 0 2mm; }
+  .tiles { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); background:#f8fafc; }
+  .tile { text-align:center; padding:3.5mm 0 3mm; border-right:1px solid var(--line); }
+  .tile:last-child { border-right:0; }
+  .tile b { display:block; font-size:19pt; line-height:1.1; }
+  .tile span { font-size:8.5pt; color:var(--muted); }
+  .crit{color:var(--crit)} .high{color:var(--high)} .med{color:var(--med)} .low{color:var(--low)} .ok{color:var(--green)}
+  .stack { display:flex; flex-wrap:wrap; gap:1.5mm; margin-top:2mm; }
+  .stack span { font-size:8pt; background:#f1f5f9; border:1px solid var(--line); border-radius:99px; padding:.4mm 2.4mm; color:var(--ink); }
+  .bug { border:1px solid var(--line); margin-bottom:3.5mm; break-inside:avoid; }
+  .bug-h { background:var(--head); display:flex; align-items:baseline; gap:3mm; padding:2.2mm 3mm; font-weight:700; color:var(--ink); font-size:10pt; }
+  .bug-h .id { white-space:nowrap; }
+  .bug-h .t { flex:1; }
+  .bug-h .sev { font-size:9pt; }
+  table { width:100%; border-collapse:collapse; }
+  td { padding:1.3mm 3mm; vertical-align:top; font-size:9.1pt; }
+  td:first-child { width:27mm; font-weight:700; color:var(--ink); }
+  code { font-family:"SF Mono",Menlo,monospace; font-size:8.4pt; background:#f1f5f9; padding:0 1mm; border-radius:1mm; }
+  ol.steps { padding-left:5mm; }
+  ol.steps li { margin-bottom:1mm; }
+  .note { font-size:8.3pt; color:var(--muted); font-style:italic; margin-top:4mm; }
+  .page-break { break-before:page; }
+</style>
+</head>
+<body>
+
+<h1>Bug Audit &amp; Fix Report</h1>
+<p class="sub">Work sample · <b>Multi-vendor delivery platform</b> (React Native customer app, React/Next.js website &amp; admin, Node/NestJS API) · Prepared by: Nahoor Tahir</p>
+
+<div class="tiles">
+  <div class="tile"><b class="crit">2</b><span>Critical</span></div>
+  <div class="tile"><b class="high">3</b><span>High</span></div>
+  <div class="tile"><b class="med">2</b><span>Medium</span></div>
+  <div class="tile"><b class="low">1</b><span>Low</span></div>
+  <div class="tile"><b class="ok">8/8</b><span>Fixed &amp; retested</span></div>
+</div>
+
+<h2>Scope &amp; approach</h2>
+<ol class="steps">
+  <li><b>Audit:</b> ran the app, website and API locally, reproduced each reported issue on Android, iOS and web, and traced it through logs, network calls and API responses.</li>
+  <li><b>Prioritize:</b> ranked bugs by user impact. Crashes, duplicate payments and data leaks come first, then broken flows, then polish.</li>
+  <li><b>Fix the root cause:</b> each fix targets why the bug happens, not just the symptom, and comes with a short explanation.</li>
+  <li><b>Retest:</b> regression-tested the related flows on every affected platform, and added automated tests where the logic is easy to break again.</li>
+</ol>
+<div class="stack"><span>React Native / Expo</span><span>React.js / Next.js</span><span>TypeScript</span><span>NestJS / Node.js</span><span>REST &amp; GraphQL</span><span>WebSockets</span><span>TanStack Query</span><span>Zustand</span><span>Jest</span></div>
+
+<h2>Bug details</h2>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-01</span><span class="t">App crashes when opening a store's category screen</span><span class="sev crit">Critical</span></div>
+  <table>
+    <tr><td>Platform</td><td>Mobile app (React Native: Android &amp; iOS)</td></tr>
+    <tr><td>Steps</td><td>Open any store, then tap a category. The screen crashes as soon as data finishes loading.</td></tr>
+    <tr><td>Root cause</td><td>The loading/error <code>return</code> ran before six <code>useCallback</code> hooks, so the number of hooks changed between renders and React threw <i>"Rendered more hooks than during the previous render"</i>.</td></tr>
+    <tr><td>Fix</td><td>Moved every hook above the early returns. The spinner now shows only when nothing is cached, so the screen also opens faster on repeat visits.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested on Android and iOS</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-02</span><span class="t">Duplicate orders and top-ups on slow networks</span><span class="sev crit">Critical</span></div>
+  <table>
+    <tr><td>Platform</td><td>Mobile app (React Native) + API</td></tr>
+    <tr><td>Steps</td><td>On a slow connection, tap Place Order (or tap it twice quickly). Two orders are created and the card can be charged twice.</td></tr>
+    <tr><td>Root cause</td><td>A global setting retried <b>every</b> failed request, including writes. A timed-out order request may already have succeeded on the server, so the retry created a second order. The button also accepted a second tap while the first request was still running.</td></tr>
+    <tr><td>Fix</td><td>Turned off automatic retries for writes (orders, wallet top-ups, card calls) and locked the Place Order button until the request finishes.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested checkout, top-up and saved-card flows</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-03</span><span class="t">"Session expired" dialog reopens in a loop on the website</span><span class="sev high">High</span></div>
+  <table>
+    <tr><td>Platform</td><td>Website (React / Next.js)</td></tr>
+    <tr><td>Steps</td><td>Let a session expire on any page, then close the "Session expired" dialog. It reopens about every 30 seconds.</td></tr>
+    <tr><td>Root cause</td><td>Every 401 response re-ran logout and reopened the dialog. A background poll for the unread-notification count kept getting 401s, so the loop never stopped.</td></tr>
+    <tr><td>Fix</td><td>Session expiry is now handled once until the next login, and the unread-count poll stops after a 401.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested login, expiry and re-login</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-04</span><span class="t">Support chat silently stops receiving messages</span><span class="sev high">High</span></div>
+  <table>
+    <tr><td>Platform</td><td>API (Node.js, GraphQL subscriptions over WebSocket)</td></tr>
+    <tr><td>Steps</td><td>Open a support chat and leave it idle for a few minutes. New replies stop arriving until the app is restarted.</td></tr>
+    <tr><td>Root cause</td><td>The server never sent keep-alive pings, so proxies dropped idle sockets and clients didn't notice the connection had died.</td></tr>
+    <tr><td>Fix</td><td>Server now sends a keep-alive every 10 s (configurable), and clients reconnect automatically if none arrives within 30 s.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested idle chats on mobile and admin</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-05</span><span class="t">Order payment breakdown doesn't add up to the total</span><span class="sev high">High</span></div>
+  <table>
+    <tr><td>Platform</td><td>API (NestJS) → admin and store dashboards</td></tr>
+    <tr><td>Steps</td><td>Open an order with a packing charge in the admin panel. Subtotal + fees ≠ total.</td></tr>
+    <tr><td>Root cause</td><td>The payment-info endpoint never returned packing charges, and the store view calculated amounts from a different source than the super-admin view.</td></tr>
+    <tr><td>Fix</td><td>Returned <code>packingCharges</code> in the API response and made both views use the order's saved subtotal and discount.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · unit tests added for the payment breakdown</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-06</span><span class="t">Chat input hidden behind the keyboard on iOS; failed messages vanish</span><span class="sev med">Medium</span></div>
+  <table>
+    <tr><td>Platform</td><td>iOS (React Native)</td></tr>
+    <tr><td>Steps</td><td>On an iPhone, open a support ticket and tap the message box. The keyboard covers the input. If sending fails, the message disappears without any warning.</td></tr>
+    <tr><td>Root cause</td><td>Android resizes the window for the keyboard, but iOS doesn't, and the screen had no keyboard handling. Send errors were also swallowed.</td></tr>
+    <tr><td>Fix</td><td>Wrapped the chat in <code>KeyboardAvoidingView</code>, made sent messages appear instantly (optimistic update), and added an alert when a send fails.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested on iOS and Android</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-07</span><span class="t">Live order map zooms out to show two continents</span><span class="sev med">Medium</span></div>
+  <table>
+    <tr><td>Platform</td><td>Website (React / Next.js)</td></tr>
+    <tr><td>Steps</td><td>Open an active order's tracking map. The map zooms out across the world instead of showing the route.</td></tr>
+    <tr><td>Root cause</td><td>A rider device was sending test GPS coordinates thousands of km away, and the map fitted its bounds to include that point.</td></tr>
+    <tr><td>Fix</td><td>Ignore any rider position more than 100 km from both the store and the delivery address.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested live and delivered orders</td></tr>
+  </table>
+</div>
+
+<div class="bug">
+  <div class="bug-h"><span class="id">BUG-08</span><span class="t">Sign-up form lags while typing on low-end phones</span><span class="sev low">Low</span></div>
+  <table>
+    <tr><td>Platform</td><td>Mobile app (React Native)</td></tr>
+    <tr><td>Steps</td><td>Type in any sign-up or OTP field on a budget Android device. Input feels delayed.</td></tr>
+    <tr><td>Root cause</td><td>Components read the whole global store, so every keystroke re-rendered all form fields across 10 auth screens.</td></tr>
+    <tr><td>Fix</td><td>Each component now subscribes only to the values it uses (Zustand <code>useShallow</code>), so typing re-renders just the active field.</td></tr>
+    <tr><td>Status</td><td><b class="ok">Fixed</b> · retested all auth screens</td></tr>
+  </table>
+</div>
+
+<h2>Handover</h2>
+<p>Each fix is delivered as a separate commit with a clear message explaining the cause and the change, plus a short changelog listing affected files and anything to watch after release. New issues found during the work are listed separately and quoted before any work starts, so there are no surprise charges.</p>
+
+<p class="note">These are real bugs I fixed in recent client work on a production multi-vendor delivery platform. Client names and source code are withheld for confidentiality.</p>
+
+</body>
+</html>

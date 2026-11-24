@@ -6,10 +6,11 @@
 export const profile = {
   name: "Nahoor Tahir",
   firstName: "Nahoor",
-  role: "React Native, Full-Stack & AI App Developer",
-  tagline: "I ship production mobile and web apps end to end — including AI-powered features.",
+  role: "React Native & Next.js Developer — Mobile, Web & Admin",
+  tagline:
+    "I ship the whole product: Android & iOS apps, the Next.js website customers order from, and the admin dashboard the business runs on.",
   summary:
-    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. I work in React Native and React.js on the frontend and NestJS with TypeORM on the backend, which lets me own a feature end to end — API contract through shipped screen. My recent work centres on super-app architecture, real-time order and location tracking, payment integration, AI-powered product features, and performance tuning for large, data-heavy apps. On Lumi I built an AI chat assistant that books a ride for the user straight from conversation.",
+    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. On the delivery platforms I work on today (Yalla, Sipp, Eatmile), the mobile apps, the customer website and the admin panel all run on one API, and I build across all three: React Native for the apps, Next.js for the websites and admin dashboards, and NestJS when a feature needs a new endpoint. My recent work centres on admin dashboards for operations and finance, super-app architecture, real-time order and rider tracking, payments, AI-powered features, and performance tuning. On Lumi I built an AI chat assistant that books a ride straight from conversation.",
   location: "Islamabad, Pakistan",
   email: "nahoor98@gmail.com",
   phone: "+92 318 0970708",
@@ -35,8 +36,10 @@ export const navLinks = [
 /** Headline technologies — rendered in the hero marquee and skills highlight row. */
 export const coreStack = [
   "React Native",
+  "Next.js",
   "React.js",
   "TypeScript",
+  "Tailwind CSS",
   "Expo",
   "Redux Toolkit",
   "NestJS",
@@ -66,13 +69,15 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Web & Language",
-    description: "Type-safe interfaces that stay maintainable as products grow.",
+    title: "Web & Admin Dashboards",
+    description:
+      "Next.js customer websites and admin panels for live delivery platforms, built on the same API as the apps.",
     skills: [
-      { name: "React.js", level: 93, highlight: true },
+      { name: "Next.js 14–16 (App Router, middleware)", level: 90, highlight: true },
+      { name: "React.js 18 / 19", level: 93, highlight: true },
       { name: "TypeScript", level: 90, highlight: true },
-      { name: "Next.js (SSR / SSG)", level: 85 },
-      { name: "Tailwind CSS", level: 88 },
+      { name: "Tailwind CSS, shadcn/ui & Radix, PrimeReact", level: 88 },
+      { name: "next-intl (i18n & RTL)", level: 84 },
       { name: "Angular", level: 70 },
     ],
   },
@@ -126,12 +131,16 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Ninjas Code",
-    role: "React Native Developer",
+    role: "Mobile & Web Developer (React Native · Next.js)",
     period: "Aug 2025 — Present",
     location: "Islamabad, Pakistan",
     summary:
-      "Building a registry-driven React Native super app that hosts multiple independent mini-apps behind one shell, shared navigation, and a shared design system.",
+      "Building the mobile apps, Next.js customer websites, and Next.js admin dashboards for delivery platforms (Yalla, Sipp, Eatmile, Enatega), plus a registry-driven React Native super app.",
     achievements: [
+      "Built admin dashboard modules in Next.js: delivery pricing, zone management with per-staff permission routing, and discovery control for Yalla Admin v2; the rider incident board, COD settlements, withdrawals, and tax settings for Eatmile's super-admin.",
+      "Shipped customer website features in Next.js 16: live rider tracking on the order map, order modifications, coupons, saved cards, and automatic location at checkout.",
+      "Resolved 30+ issues from a client QA audit across Sipp's admin panel and customer website.",
+      "Built a banking-style forced-update system: admins set minimum versions and the apps check the installed binary before letting users in.",
       "Architected the super-app shell so new verticals plug in without touching existing app code.",
       "Built the deliveries mini-app across three storefront modes — multi-vendor marketplace, single-vendor, and store chain — from one reusable component and hook layer, cutting duplicate code by ~40%.",
       "Improved scroll responsiveness by 25–30% on low-end devices by virtualizing discovery feeds with FlashList and removing redundant renders through memoization and stable render callbacks.",
@@ -139,7 +148,7 @@ export const experience: Experience[] = [
       "Standardized REST and GraphQL integration behind a typed service layer with centralized error handling, retries, and TanStack Query caching — reducing production API failures by 20%.",
       "Drove sprint planning and code reviews in an Agile team of 6, maintaining 100% on-time milestone delivery.",
     ],
-    stack: ["React Native", "Expo", "TypeScript", "NestJS", "Socket.IO", "TanStack Query"],
+    stack: ["React Native", "Next.js", "Expo", "TypeScript", "NestJS", "GraphQL", "TanStack Query"],
   },
   {
     company: "Intercargo Logistics",
@@ -198,9 +207,13 @@ export type ProjectImage = {
   wide?: boolean;
 };
 
+export type Platform = "Mobile app" | "Website" | "Admin panel" | "Backend";
+
 export type Project = {
   title: string;
   category: string;
+  /** Which parts of the product I built — rendered as pills on the card. */
+  platforms?: Platform[];
   description: string;
   highlights: string[];
   stack: string[];
@@ -221,6 +234,7 @@ export const projects: Project[] = [
   {
     title: "Enatega — Super App & Multivendor Delivery Ecosystem",
     category: "React Native · NestJS",
+    platforms: ["Mobile app", "Admin panel", "Backend"],
     description:
       "A production, open-source commerce ecosystem live on the Play Store: a customer super app, a rider app, a restaurant app, a super admin panel, and a NestJS backend.",
     highlights: [
@@ -239,6 +253,7 @@ export const projects: Project[] = [
   {
     title: "Lumi — AI-Powered Ride-Hailing Platform",
     category: "React Native · AI · Real-time",
+    platforms: ["Mobile app"],
     description:
       "Two production apps on Android and iOS, comparable to Uber and inDrive — a driver app and a customer app sharing one real-time coordination layer, with an AI chat assistant that books rides conversationally.",
     highlights: [
@@ -289,6 +304,7 @@ export const projects: Project[] = [
   {
     title: "Borku — Multivendor Delivery Ecosystem",
     category: "React Native · GraphQL",
+    platforms: ["Mobile app"],
     description:
       "Three production apps on the App Store and Google Play — a customer app, a rider app, and the Partner Hub store app — all driven by one GraphQL API with real-time subscriptions.",
     highlights: [
@@ -332,8 +348,84 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Yalla — Admin v2, Customer Website & Apps",
+    category: "Next.js · GraphQL · React Native",
+    platforms: ["Admin panel", "Website", "Mobile app"],
+    description:
+      "A multi-vendor delivery platform where I work across every surface: the Next.js admin dashboard (Admin v2), the customer ordering website, and the customer, rider, and store React Native apps, all on one GraphQL API.",
+    highlights: [
+      "Admin v2: delivery-pricing configuration, zone management, and per-staff permission routing — staff land on the first page they're allowed to see instead of a /forbidden bounce",
+      "Admin v2: discovery-section control with infinite scroll over every eligible store, product ordering within categories, and rider/store password reset that never exposes stored passwords",
+      "Support chat moved to GraphQL subscriptions with authenticated sockets, reconnection, and live ticket updates in the admin",
+      "Banking-style forced update: the admin sets minimum versions and the apps compare the installed native binary, not the OTA bundle",
+      "Customer website: new login flows, saved cards, automatic location at checkout, and image protection and bot filtering in Next.js middleware",
+      "Fixed a hydration error from a nested <html> in the localized layout and a stable Dispatch rider list while scrolling",
+    ],
+    stack: ["Next.js 14", "Apollo Client", "GraphQL", "PrimeReact", "Tailwind CSS", "next-intl", "React Native"],
+    images: [
+      {
+        src: "/projects/yalla/web-home.jpg",
+        alt: "Yalla customer website homepage with city search",
+        caption: "Yalla customer website — city search, current location, and saved addresses",
+        wide: true,
+      },
+    ],
+    liveUrl: "https://yalla-delivery.com",
+    liveLabel: "yalla-delivery.com",
+    featured: true,
+  },
+  {
+    title: "Sipp — Next.js Ordering Website & Admin Dashboard",
+    category: "Next.js 16 · React 19 · Real-time",
+    platforms: ["Website", "Admin panel", "Mobile app"],
+    description:
+      "Food and grocery delivery live in Costa Rica. I work on the Next.js customer website, the operator admin dashboard, and the React Native apps, all sharing one API.",
+    highlights: [
+      "Website: live rider location on the order map, with stale-GPS handling and filtering of positions far from the order",
+      "Website: one-time session-expiry handling, redirects for signed-in users, and order notes kept between cart and checkout",
+      "Website: fixed hydration errors and a store page that loaded forever when no location was set",
+      "Admin: real-time rider tracking for the operations map, min/max selection limits for add-ons, and refund and reconciliation columns in restaurant financial reports",
+      "Resolved 30+ issues from a client QA audit across the admin and the website — coupons, stores, multi-step wizards, and translations",
+    ],
+    stack: ["Next.js 16", "React 19", "Tailwind CSS", "shadcn/ui", "TanStack Query", "next-intl", "Socket.IO"],
+    images: [
+      {
+        src: "/projects/sipp/web-home.jpg",
+        alt: "Sipp customer website homepage with delivery address search",
+        caption: "Sipp website — address-first ordering with delivery zones and language switcher",
+        wide: true,
+      },
+      {
+        src: "/projects/sipp/web-categories.jpg",
+        alt: "Sipp website restaurants and groceries categories",
+        caption: "Restaurants and groceries from one storefront",
+        wide: true,
+      },
+    ],
+    liveUrl: "https://sipp-delivery.netlify.app",
+    liveLabel: "Sipp website",
+    featured: true,
+  },
+  {
+    title: "Eatmile — Super-Admin Dashboard, Website & Apps",
+    category: "Next.js 16 · React 19 · NestJS",
+    platforms: ["Admin panel", "Website", "Mobile app", "Backend"],
+    description:
+      "A deliveries super-platform where I contribute to the Next.js super-admin, the customer website, the rider and store apps, and the NestJS modules behind them.",
+    highlights: [
+      "Super-admin: rider incident board with support-hold badges on orders, and a support case view with rider management in context",
+      "Super-admin: COD settlements with courier code badges, withdrawal requests with pending counts, rider activity insights, and activity logs",
+      "Super-admin: company and tax settings forms, and one consistent order-code format across every screen",
+      "Website: order modifications, mixed-case coupon codes, restaurant busy mode, delivery-zone coverage on addresses, and German localization",
+      "Apps & backend: rider wallet and withdrawals, store-app order handling, and NestJS rider-incident and support-chat modules",
+    ],
+    stack: ["Next.js 16", "React 19", "shadcn/ui", "Zustand", "TanStack Query", "Recharts", "NestJS"],
+    featured: true,
+  },
+  {
     title: "Intercargo & Odda — Freight Portal + Same-Day Courier App",
     category: "Angular · React Native · SignalR",
+    platforms: ["Mobile app", "Website"],
     description:
       "A logistics platform pairing the Intercargo freight portal with Odda, an on-demand same-day courier app for the UK — book a parcel, collect live quotes from nearby drivers, and follow it door to door.",
     highlights: [
@@ -407,11 +499,18 @@ export const services: Service[] = [
     points: ["Expo & bare CLI", "EAS Build / OTA updates", "Store submission"],
   },
   {
-    title: "React & Next.js Web Apps",
+    title: "Next.js Websites",
     description:
-      "Responsive, accessible interfaces built on a reusable component system, with SSR and SSG where they earn their keep.",
+      "Customer-facing ordering sites and web apps on the Next.js App Router: fast, multi-language, and wired to the same API as your mobile app.",
     icon: "layout",
-    points: ["Component systems", "SSR & SEO", "Figma to pixel-perfect UI"],
+    points: ["App Router & middleware", "SSR & SEO", "next-intl / RTL"],
+  },
+  {
+    title: "Admin Dashboards",
+    description:
+      "Back-office panels operators run the business on: orders, dispatch, zones, pricing, payouts, reports, and role-based staff access.",
+    icon: "layout",
+    points: ["Role-based access", "Live maps & data tables", "Finance & reports"],
   },
   {
     title: "End-to-End Feature Delivery",
@@ -453,7 +552,7 @@ export const services: Service[] = [
 export const stats = [
   { value: "4+", label: "Years building products" },
   { value: "8+", label: "Apps live on Play Store & App Store" },
-  { value: "4", label: "Companies shipped across" },
+  { value: "3", label: "Next.js admin dashboards" },
   { value: "25–30%", label: "Scroll performance gained" },
 ] as const;
 

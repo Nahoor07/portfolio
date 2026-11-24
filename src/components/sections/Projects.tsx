@@ -11,7 +11,7 @@ export function Projects() {
       <SectionHeading
         eyebrow="Featured projects"
         title="Selected work"
-        description="Production apps live on the Play Store and App Store. Each one covers a different part of the stack — super-app architecture, real-time tracking, payments, and performance."
+        description="Mobile apps live on the Play Store and App Store, plus the Next.js websites and admin dashboards behind them. Each one covers a different part of the stack: super-app architecture, real-time tracking, back-office operations, payments, and performance."
       />
 
       <div className="mt-12 grid gap-5 lg:grid-cols-2">
