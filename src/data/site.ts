@@ -10,7 +10,7 @@ export const profile = {
   tagline:
     "I ship the whole product: Android & iOS apps, the Next.js website customers order from, and the admin dashboard the business runs on.",
   summary:
-    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. On the delivery platforms I work on today (Yalla, Sipp, Eatmile), the mobile apps, the customer website and the admin panel all run on one API, and I build across all three: React Native for the apps, Next.js for the websites and admin dashboards, and NestJS when a feature needs a new endpoint. My recent work centres on admin dashboards for operations and finance, super-app architecture, real-time order and rider tracking, payments, AI-powered features, and performance tuning. On Lumi I built an AI chat assistant that books a ride straight from conversation.",
+    "Full-stack developer with 4+ years building production mobile and web applications, shipped across four companies from concept to Play Store and App Store release. On the delivery platforms I work on today (Yalla, Sipp, Eatmile), the mobile apps, the customer website and the admin panel all run on one API, and I build across all three: React Native for the apps, Next.js for the websites and admin dashboards, and NestJS when a feature needs a new endpoint. My recent work centres on admin dashboards for operations and finance, super-app architecture, real-time order and rider tracking, payments, AI-powered features, and performance tuning. On Lumi I built an AI chat assistant that books a ride straight from conversation, and on my own product, WA Assistant, an AI agent that sells for small businesses on WhatsApp: it answers text and voice notes in Urdu and English, qualifies leads, and alerts the owner.",
   location: "Islamabad, Pakistan",
   email: "nahoor98@gmail.com",
   phone: "+92 318 0970708",
@@ -114,6 +114,8 @@ export const skillGroups: SkillGroup[] = [
       { name: "Tool / function calling", level: 80 },
       { name: "Streaming responses in React Native", level: 78 },
       { name: "Conversational booking & task flows", level: 85 },
+      { name: "WhatsApp AI agents (Cloud API, Gemini)", level: 84, highlight: true },
+      { name: "Voice-note transcription (Urdu / English)", level: 78 },
     ],
   },
 ];
@@ -299,6 +301,67 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://play.google.com/store/apps/details?id=com.lastorder.app",
     liveLabel: "Google Play",
+    featured: true,
+  },
+  {
+    title: "WA Assistant — AI WhatsApp Sales Agent for Small Businesses",
+    category: "Node.js · TypeScript · AI Agents",
+    platforms: ["Backend"],
+    description:
+      "My own product: an AI assistant that answers customers on WhatsApp, qualifies leads, and alerts the owner. The first deployment answers for RAKS Contractor & Builders, a real-estate business, in Roman Urdu, Urdu, and English, including voice notes.",
+    highlights: [
+      "Built on the WhatsApp Cloud API with a Fastify + TypeScript webhook: verify-token handshake, HMAC-SHA256 signature check on the raw body with timingSafeEqual, and the signature check refused off in production",
+      "AI agent with tool/function calling: search_listings (the bot may only describe properties found in the data, never invents prices), save_lead (name, interest, budget, cash or installments, timeline, preferred site visit), notify_owner, and send_photos",
+      "Owner alerts on WhatsApp: hot leads, customers asking for a person, upset customers, and questions the data can't answer reach the owner as a lead card, with the same alert held back for 6 hours",
+      "Voice notes: downloads the customer's audio from WhatsApp, Gemini transcribes Urdu and Punjabi speech into Roman Urdu, and the bot answers it like a typed message; unclear audio gets a polite ask to re-record",
+      "Reliability: replies 200 to Meta first and works after, deduplicates retried deliveries by message id, runs one queue per customer so replies stay in order, times out AI and WhatsApp calls, and falls back to a second Gemini model when the first stalls",
+      "Provider-agnostic AI interface (Gemini and an echo bot), SQLite-backed conversations and leads that survive restarts, a terminal chat for demos without WhatsApp, and 45 Vitest tests using a fake WhatsApp client",
+    ],
+    stack: ["Node.js", "TypeScript", "Fastify", "WhatsApp Cloud API", "Google Gemini", "Tool Calling", "SQLite", "Zod", "Vitest"],
+    images: [
+      {
+        src: "/projects/wa-assistant/intro.webp",
+        alt: "WA Assistant live demo title card: never miss a property buyer on WhatsApp",
+        caption: "Live demo for RAKS Contractor & Builders, Bhurban",
+      },
+      {
+        src: "/projects/wa-assistant/buyer-asks.webp",
+        alt: "A buyer asks on WhatsApp whether a cottage is available in Bhurban",
+        caption: "1/7 · A buyer asks on WhatsApp",
+      },
+      {
+        src: "/projects/wa-assistant/real-listings.webp",
+        alt: "The assistant replies in Roman Urdu with four real cottage listings",
+        caption: "2/7 · Replies in seconds with real listings, in Roman Urdu",
+      },
+      {
+        src: "/projects/wa-assistant/never-invents-price.webp",
+        alt: "The assistant describes Twin Cottages with Parking and says the price is on request",
+        caption: "3/7 · Never makes up a price: the owner confirms it",
+      },
+      {
+        src: "/projects/wa-assistant/sends-photos.webp",
+        alt: "The assistant sends photos of the Twin Cottages listing in the chat",
+        caption: "4/7 · Sends property photos automatically",
+      },
+      {
+        src: "/projects/wa-assistant/captures-budget-visit.webp",
+        alt: "The assistant notes the buyer's budget and preferred site visit time",
+        caption: "5/7 · Captures budget, cash or installments, and visit time",
+      },
+      {
+        src: "/projects/wa-assistant/owner-gets-lead.webp",
+        alt: "The assistant saves the buyer's details and forwards the lead to the owner",
+        caption: "6/7 · Serious buyer? The owner gets the lead on WhatsApp",
+      },
+      {
+        src: "/projects/wa-assistant/polite-close.webp",
+        alt: "The assistant closes the conversation politely with Allah Hafiz",
+        caption: "7/7 · Polite to the very end",
+      },
+    ],
+    liveUrl: "/projects/wa-assistant/raks-demo.mp4",
+    liveLabel: "Watch demo video",
     featured: true,
   },
   {
@@ -529,9 +592,9 @@ export const services: Service[] = [
   {
     title: "AI-Powered App Features",
     description:
-      "Adding AI where it removes steps — like Lumi's chat assistant, where a user books a ride by describing the trip instead of filling a form.",
+      "Adding AI where it removes steps — like Lumi's chat assistant, where a user books a ride by describing the trip, or WA Assistant, which answers customers on WhatsApp and hands hot leads to the owner.",
     icon: "workflow",
-    points: ["Conversational booking flows", "LLM tool calling", "Chat UI & streaming"],
+    points: ["Conversational booking flows", "WhatsApp AI agents", "LLM tool calling"],
   },
   {
     title: "Performance Optimisation",

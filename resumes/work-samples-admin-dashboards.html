@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nahoor Tahir — Work Samples: Admin Dashboards &amp; Business Systems</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm; }
+  :root { --ink:#0b1530; --body:#3a4560; --muted:#6b7690; --line:#e2e7f0; --blue:#2563eb; --soft:#eaf1ff; --green:#059669; --gsoft:#e6f7f1; }
+  * { box-sizing: border-box; }
+  body { margin:0; font: 9.6pt/1.45 -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--body); }
+  h1, h2, h3 { color: var(--ink); margin:0; line-height:1.15; }
+  h1 { font-size: 22pt; letter-spacing:-.015em; }
+  h2 { font-size: 14pt; margin: 0 0 2px; }
+  p { margin: 0 0 6px; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  .eyebrow { font-size: 7.6pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color: var(--blue); margin-bottom: 4px; }
+  .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom: 3px solid var(--ink); padding-bottom: 9px; margin-bottom: 11px; }
+  .head .right { text-align:right; font-size: 9pt; color: var(--muted); }
+  .head .right b { color: var(--ink); font-size: 10.5pt; }
+  .intro { background: #f6f8fc; border-radius: 6px; padding: 9px 12px; margin-bottom: 12px; font-size: 9.8pt; }
+  .proj { margin-bottom: 12px; break-inside: avoid; }
+  .proj-head { display:flex; justify-content:space-between; align-items:baseline; gap: 10px; margin-bottom: 4px; }
+  .tags { display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
+  .tag { font-size: 7pt; font-weight:700; letter-spacing:.05em; color: var(--blue); background: var(--soft); border-radius: 99px; padding: 1px 7px; white-space:nowrap; }
+  .tag.g { color: var(--green); background: var(--gsoft); }
+  .lead { color: var(--body); margin-bottom: 6px; }
+  figure { margin: 0; }
+  figure img { width:100%; display:block; border:1px solid var(--line); border-radius:6px; }
+  figcaption { font-size: 8.2pt; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+  figcaption b { color: var(--ink); }
+  .wide img { max-height: 255px; object-fit: cover; object-position: top left; }
+  .row { display:flex; gap: 9px; align-items:flex-start; }
+  .row > figure { flex: 1; min-width: 0; }
+  .phones img { height: 250px; object-fit: cover; object-position: top; }
+  .web img { height: 165px; object-fit: cover; object-position: top; }
+  ul { margin: 0 0 6px; padding-left: 16px; }
+  li { margin-bottom: 2px; }
+  .note { font-size: 8pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Work samples</div>
+      <h1>Admin Dashboards &amp; Business Systems</h1>
+    </div>
+    <div class="right"><b>Nahoor Tahir</b><br>Full-Stack Developer · Next.js · NestJS · React Native<br>4+ years</div>
+  </div>
+
+  <p class="intro">Back-office software businesses run on every day: dashboards, orders, payments, refunds, reports, staff roles and permissions. All of it is built in Next.js + TypeScript on NestJS / GraphQL APIs, and all of it is live in production. <span class="note">Customer and rider names are blurred for privacy.</span></p>
+
+  <div class="proj">
+    <div class="proj-head"><h2>Eatmile — Super-Admin Panel</h2><div class="tags"><span class="tag">Next.js 16</span><span class="tag">React 19</span><span class="tag">shadcn/ui</span><span class="tag">Recharts</span><span class="tag g">Live</span></div></div>
+    <p class="lead">The operations and finance panel for a delivery platform in Cyprus: vendors, stores, riders, orders, refunds, settlements, withdrawals, commission, reports, staff and permissions.</p>
+    <figure class="wide"><img src="../public/projects/eatmile/eatmile-dashboard.jpg" alt=""><figcaption><b>Dashboard:</b> revenue, sales, orders and active customers with Daily / Weekly / Monthly / Yearly / Custom filters, order trend and order status charts.</figcaption></figure>
+  </div>
+
+  <div class="proj">
+    <figure class="wide"><img src="../public/projects/eatmile/eatmile-roles.jpg" alt=""><figcaption><b>Roles and permissions:</b> create roles, assign staff, choose which pages and actions each role can use, and switch roles on or off. Lists export to PDF and Excel.</figcaption></figure>
+  </div>
+</section>
+
+<section class="page">
+  <div class="proj">
+    <figure class="wide"><img src="../public/projects/eatmile/eatmile-refunds.jpg" alt=""><figcaption><b>Eatmile — Refunds:</b> searchable, sortable records with date-range filters, full and partial refunds paid as wallet credit or loyalty points, and PDF / Excel export.</figcaption></figure>
+    <ul style="margin-top:7px">
+      <li>Built for this panel: the rider incident board, COD settlements, withdrawal requests with pending counts, rider activity insights, activity logs, and company and tax settings.</li>
+      <li>One consistent order-code format across every screen, so staff and customers always refer to the same number.</li>
+    </ul>
+  </div>
+
+  <div class="proj">
+    <div class="proj-head"><h2>Yalla &amp; Sipp — Admin Panels and Customer Websites</h2><div class="tags"><span class="tag">Next.js 14–16</span><span class="tag">GraphQL</span><span class="tag">TanStack Query</span><span class="tag">next-intl</span><span class="tag g">Live</span></div></div>
+    <ul>
+      <li><b>Yalla Admin v2:</b> per-staff permissions (each staff member lands only on pages they're allowed to see), delivery pricing, zone management, and live support-ticket chat over GraphQL subscriptions.</li>
+      <li><b>Sipp admin:</b> real-time rider tracking map, restaurant financial reports with refund and reconciliation columns, and fixes for 30+ issues from a client QA audit.</li>
+      <li><b>Customer websites</b> on the same API as the admin: live order tracking, saved cards, coupons, order notes, and multi-language support.</li>
+    </ul>
+    <div class="row web">
+      <figure><img src="../public/projects/yalla/web-home.jpg" alt=""><figcaption>Yalla customer website (yalla-delivery.com)</figcaption></figure>
+      <figure><img src="../public/projects/sipp/web-categories.jpg" alt=""><figcaption>Sipp ordering website: restaurants and groceries</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="proj">
+    <div class="proj-head"><h2>WA Assistant — AI WhatsApp Sales Agent</h2><div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">WhatsApp Cloud API</span><span class="tag">Gemini</span><span class="tag g">My product</span></div></div>
+    <p class="lead">My own product, live for a real-estate business. It answers customers on WhatsApp 24/7 in Roman Urdu, Urdu and English (voice notes too), shows only real listings and never invents prices, sends photos, saves each lead (budget, cash or installments, visit time), and sends serious buyers to the owner's WhatsApp.</p>
+    <div class="row phones">
+      <figure><img src="../public/projects/wa-assistant/real-listings.webp" alt=""><figcaption>Replies with real listings</figcaption></figure>
+      <figure><img src="../public/projects/wa-assistant/sends-photos.webp" alt=""><figcaption>Sends property photos</figcaption></figure>
+      <figure><img src="../public/projects/wa-assistant/captures-budget-visit.webp" alt=""><figcaption>Captures budget and visit time</figcaption></figure>
+      <figure><img src="../public/projects/wa-assistant/owner-gets-lead.webp" alt=""><figcaption>Owner gets the lead</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="proj-head"><h2>Borku Partner Hub &amp; Lumi — Production Apps</h2><div class="tags"><span class="tag">React Native</span><span class="tag">GraphQL</span><span class="tag">AI tool calling</span><span class="tag g">App Store · Google Play</span></div></div>
+    <p class="lead">Borku's store app handles stock, menu, a live order queue and earnings. Lumi's AI assistant books a ride straight from a chat message.</p>
+    <div class="row phones">
+      <figure><img src="../public/projects/borku/partner-hub-dashboard.webp" alt=""><figcaption>Borku Partner Hub: orders, earnings, ratings</figcaption></figure>
+      <figure><img src="../public/projects/borku/order-progress.webp" alt=""><figcaption>Borku: live order status steps</figcaption></figure>
+      <figure><img src="../public/projects/lumi/ai-chat-booking.webp" alt=""><figcaption>Lumi: AI assistant booking a ride</figcaption></figure>
+      <figure><img src="../public/projects/lumi/ride-booking.webp" alt=""><figcaption>Lumi: live map booking</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
